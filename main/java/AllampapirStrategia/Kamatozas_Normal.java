@@ -1,3 +1,5 @@
+package Strategy;
+
 public class Kamatozas_Normal extends KamatozasiStrategia
 {
     private int nevErtek;
@@ -7,7 +9,7 @@ public class Kamatozas_Normal extends KamatozasiStrategia
     private boolean tbsz;
 
     Kamatado kamatado = new Kamatado();
-    Portfolio myPortfolio = Portfolio.getInstance();
+    Egyenleg myEgyenleg = Egyenleg.getInstance();
 
     public Kamatozas_Normal(int nevErtek, int lejaratiIdo, int futamIdo,  double kamat, boolean tbsz)
     {
@@ -26,14 +28,12 @@ public class Kamatozas_Normal extends KamatozasiStrategia
         this.tbsz = true;
     }
 
-
     @Override
     public void Kamatozas()
     {
         double aktualisKamat = (nevErtek * kamat * (1.0 - kamatado.getKamatado(tbsz))) * futamIdo;
-        System.out.println(aktualisKamat);
-        myPortfolio.addNevertek(nevErtek);
-        myPortfolio.addKamat(aktualisKamat);
+        System.out.println("Kamatozás: " + aktualisKamat);
+        myEgyenleg.addKamat(aktualisKamat);
     }
 
 }

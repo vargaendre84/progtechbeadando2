@@ -20,7 +20,6 @@ public class Megjelenito extends JFrame {
         this.setContentPane(mainPanel);
         this.pack();
 
-
         final Jegybank jegybank = Jegybank.getInstance();
         jegybank.nev = "Magyar Nemzeti Bank";
         jegybank.alapkamat = 0.009;  //2020.03.25.  mnb.hu
@@ -60,12 +59,10 @@ public class Megjelenito extends JFrame {
         });
     }
 
-
    /* public static void main(String[] args) {
         JFrame frame = new Megjelenito("Állampapír nyilvántartó");
         frame.setVisible(true);
         frame.setSize(600,600);
-
     }
 */
 }

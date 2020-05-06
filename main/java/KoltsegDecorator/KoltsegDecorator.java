@@ -1,3 +1,5 @@
+package Decorator;
+
 abstract class KoltsegDecorator implements IKoltseg
 {
     protected IKoltseg alapKoltseg;

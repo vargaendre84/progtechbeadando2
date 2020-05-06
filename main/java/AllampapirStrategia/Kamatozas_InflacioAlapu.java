@@ -1,4 +1,4 @@
-import java.rmi.dgc.Lease;
+package Strategy;
 
 public class Kamatozas_InflacioAlapu extends KamatozasiStrategia
 {
@@ -10,7 +10,7 @@ public class Kamatozas_InflacioAlapu extends KamatozasiStrategia
 
     Kamatado kamatado = new Kamatado();
     Inflacio inflacio = new Inflacio();
-    Portfolio myPortfolio = Portfolio.getInstance();
+    Egyenleg myEgyenleg = Egyenleg.getInstance();
 
     public Kamatozas_InflacioAlapu(int nevErtek, int lejaratiIdo, int futamIdo, double kamatPremium, boolean tbsz)
     {
@@ -25,16 +25,15 @@ public class Kamatozas_InflacioAlapu extends KamatozasiStrategia
     public void Kamatozas()
     {
         double aktualisKamat = 0.0;
-        int aktualisEv = lejaratiIdo;
+        int aktualisEv = 2020;
         if( futamIdo > lejaratiIdo) futamIdo = lejaratiIdo;
         for(int i = 0; i < futamIdo; i++)
         {
             aktualisKamat += nevErtek * (kamatPremium + inflacio.getEvesInflacio(aktualisEv)) * (1.0 - kamatado.getKamatado(tbsz));
             aktualisEv++;
         }
-        System.out.println(aktualisKamat) ;
-        myPortfolio.addNevertek(nevErtek);
-        myPortfolio.addKamat(aktualisKamat);
+        System.out.println("Kamatozás: " + aktualisKamat) ;
+        myEgyenleg.addKamat(aktualisKamat);
     }
 
 }

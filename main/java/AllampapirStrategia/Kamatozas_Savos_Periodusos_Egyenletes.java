@@ -1,3 +1,5 @@
+package Strategy;
+
 public class Kamatozas_Savos_Periodusos_Egyenletes extends KamatozasiStrategia
 {
     private int periodusSzam;

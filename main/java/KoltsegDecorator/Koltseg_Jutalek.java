@@ -1,3 +1,5 @@
+package Decorator;
+
 public class Koltseg_Jutalek extends KoltsegDecorator
 {
     private static double alapJutalek = 0.01;
@@ -9,8 +11,11 @@ public class Koltseg_Jutalek extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(int nevErtek, int lejaratiIdo, int futamIdo)
+    public double getKoltseg(int nevErtek, int lejaratiIdo, int futamIdo, boolean befektetesiAlap, boolean ertekpapirSzamla)
     {
-        return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo) + nevErtek*alapJutalek;
+        if(befektetesiAlap)
+            return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo, befektetesiAlap, ertekpapirSzamla) + nevErtek*alapJutalek;
+        else
+            return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo, befektetesiAlap, ertekpapirSzamla);
     }
 }

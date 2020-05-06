@@ -1,8 +1,9 @@
+package Strategy;
+
 public class Kamatado implements IKamatado
 {
     private static final double alapkamatado = 0.15;
     private static final double tbszkamatado = 0;
-
 
     public double getKamatado(boolean tbsz)
     {
@@ -14,7 +15,6 @@ public class Kamatado implements IKamatado
 }
 
 /*
-
 4.
 public double getKamatado()  //getKamatAdoNemTbsz passed: expected = 0.15; actual=0.15;
     {                           //getKamatAdoTbsz passed
@@ -47,5 +47,4 @@ public double getKamatado()  //getKamatAdoTbsz failed: expected = 0.0; actual=1.
     {
         return 1;
     }
-
  */

@@ -1,3 +1,5 @@
+package Strategy;
+
 public class Allampapir_PMAP extends AllamPapir
 {
     KamatozasiStrategia kamat;
@@ -14,7 +16,7 @@ public class Allampapir_PMAP extends AllamPapir
     @Override
     public void getNev()
     {
-        System.out.println(nev);
+        System.out.println("Állampapír neve: " + nev);
     }
 
     @Override
