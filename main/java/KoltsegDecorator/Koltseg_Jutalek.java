@@ -1,12 +1,16 @@
-public class Koltseg_Jutalek implements IKoltseg
+public class Koltseg_Jutalek extends KoltsegDecorator
 {
+    private static double alapJutalek = 0.01;
+    public Koltseg_Jutalek(IKoltseg alapKoltseg) {super(alapKoltseg);}
+
     @Override
     public String getKoltsegNem() {
-        return "nul";
+        return alapKoltseg.getKoltsegNem() + " +jutalék ";
     }
 
     @Override
-    public int getKoltseg() {
-        return 0;
+    public double getKoltseg(int nevErtek, int lejaratiIdo, int futamIdo)
+    {
+        return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo) + nevErtek*alapJutalek;
     }
 }

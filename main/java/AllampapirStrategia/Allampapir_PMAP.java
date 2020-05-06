@@ -1,11 +1,13 @@
-public class Allampapir_PMAP extends AllamKotveny
+public class Allampapir_PMAP extends AllamPapir
 {
-    Strategia_Kamatozasi kamat;
+    KamatozasiStrategia kamat;
+    KoltsegStrategia koltseg;
     private String nev;
 
-    public Allampapir_PMAP(Strategia_Kamatozasi kamat, String nev)
+    public Allampapir_PMAP(KamatozasiStrategia kamat, KoltsegStrategia koltseg, String nev)
     {
         this.kamat = kamat;
+        this.koltseg = koltseg;
         this.nev = nev;
     }
 
@@ -21,6 +23,5 @@ public class Allampapir_PMAP extends AllamKotveny
     }
 
     @Override
-    public void Koltsegek() {
-    }
+    public void KoltsegSzamitas(){koltseg.KoltsegSzamitas();}
 }

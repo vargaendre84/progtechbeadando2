@@ -1,4 +1,4 @@
-public class Kamatozas_Savos_Periodusos_Egyenletes extends Strategia_Kamatozasi
+public class Kamatozas_Savos_Periodusos_Egyenletes extends KamatozasiStrategia
 {
     private int periodusSzam;
     private int periodusHossz;

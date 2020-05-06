@@ -1,18 +1,27 @@
-public class Allampapir_MAPPlusz extends AllamKotveny
+public class Allampapir_MAPPlusz extends AllamPapir
 {
+    KamatozasiStrategia kamat;
+    KoltsegStrategia koltseg;
+    private String nev;
+
+    public Allampapir_MAPPlusz(KamatozasiStrategia kamat, KoltsegStrategia koltseg, String nev)
+    {
+        this.kamat = kamat;
+        this.koltseg = koltseg;
+        this.nev = nev;
+    }
 
     @Override
     public void getNev()
     {
-        System.out.println();
+        System.out.println(nev);
     }
 
     @Override
     public void Kamatozas() {
+        kamat.Kamatozas();
     }
 
     @Override
-    public void Koltsegek() {
-
-    }
+    public void KoltsegSzamitas(){koltseg.KoltsegSzamitas();}
 }

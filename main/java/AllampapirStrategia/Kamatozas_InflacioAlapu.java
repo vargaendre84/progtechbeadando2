@@ -1,7 +1,9 @@
-public class Kamatozas_InflacioAlapu extends Strategia_Kamatozasi
+import java.rmi.dgc.Lease;
+
+public class Kamatozas_InflacioAlapu extends KamatozasiStrategia
 {
     private int nevErtek;
-    private int jegyzesDatum;
+    private int lejaratiIdo;
     private int futamIdo;
     private double kamatPremium;
     private boolean tbsz;
@@ -10,10 +12,10 @@ public class Kamatozas_InflacioAlapu extends Strategia_Kamatozasi
     Inflacio inflacio = new Inflacio();
     Portfolio myPortfolio = Portfolio.getInstance();
 
-    public Kamatozas_InflacioAlapu(int nevErtek, int jegyzesDatum, int futamIdo, double kamatPremium, boolean tbsz)
+    public Kamatozas_InflacioAlapu(int nevErtek, int lejaratiIdo, int futamIdo, double kamatPremium, boolean tbsz)
     {
         this.nevErtek = nevErtek;
-        this.jegyzesDatum = jegyzesDatum;
+        this.lejaratiIdo = lejaratiIdo;
         this.futamIdo = futamIdo;
         this.kamatPremium = kamatPremium;
         this.tbsz = tbsz;
@@ -23,7 +25,8 @@ public class Kamatozas_InflacioAlapu extends Strategia_Kamatozasi
     public void Kamatozas()
     {
         double aktualisKamat = 0.0;
-        int aktualisEv = jegyzesDatum;
+        int aktualisEv = lejaratiIdo;
+        if( futamIdo > lejaratiIdo) futamIdo = lejaratiIdo;
         for(int i = 0; i < futamIdo; i++)
         {
             aktualisKamat += nevErtek * (kamatPremium + inflacio.getEvesInflacio(aktualisEv)) * (1.0 - kamatado.getKamatado(tbsz));

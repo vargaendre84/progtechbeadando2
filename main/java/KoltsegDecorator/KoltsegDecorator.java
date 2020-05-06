@@ -1,5 +1,5 @@
 abstract class KoltsegDecorator implements IKoltseg
 {
-    protected IKoltseg koltseg;
-    public KoltsegDecorator(IKoltseg koltseg) {this.koltseg = koltseg;}
+    protected IKoltseg alapKoltseg;
+    public KoltsegDecorator(IKoltseg alapKoltseg) {this.alapKoltseg = alapKoltseg;}
 }

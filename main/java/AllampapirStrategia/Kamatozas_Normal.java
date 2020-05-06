@@ -1,6 +1,7 @@
-public class Kamatozas_Normal extends Strategia_Kamatozasi
+public class Kamatozas_Normal extends KamatozasiStrategia
 {
     private int nevErtek;
+    private int lejaratiIdo;
     private int futamIdo;
     private double kamat;
     private boolean tbsz;
@@ -8,9 +9,10 @@ public class Kamatozas_Normal extends Strategia_Kamatozasi
     Kamatado kamatado = new Kamatado();
     Portfolio myPortfolio = Portfolio.getInstance();
 
-    public Kamatozas_Normal(int nevErtek, int futamIdo, double kamat, boolean tbsz)
+    public Kamatozas_Normal(int nevErtek, int lejaratiIdo, int futamIdo,  double kamat, boolean tbsz)
     {
         this.nevErtek = nevErtek;
+        this.lejaratiIdo = lejaratiIdo;
         this.futamIdo = futamIdo;
         this.kamat = kamat;
         this.tbsz = tbsz;
