@@ -1,0 +1,37 @@
+public class Kamatozas_Normal extends Strategia_Kamatozasi
+{
+    private int nevErtek;
+    private int futamIdo;
+    private double kamat;
+    private boolean tbsz;
+
+    Kamatado kamatado = new Kamatado();
+    Portfolio myPortfolio = Portfolio.getInstance();
+
+    public Kamatozas_Normal(int nevErtek, int futamIdo, double kamat, boolean tbsz)
+    {
+        this.nevErtek = nevErtek;
+        this.futamIdo = futamIdo;
+        this.kamat = kamat;
+        this.tbsz = tbsz;
+    }
+
+    public Kamatozas_Normal()
+    {
+        this.nevErtek = 1000000;
+        this.futamIdo = 3;
+        this.kamat = 0.01;
+        this.tbsz = true;
+    }
+
+
+    @Override
+    public void Kamatozas()
+    {
+        double aktualisKamat = (nevErtek * kamat * (1.0 - kamatado.getKamatado(tbsz))) * futamIdo;
+        System.out.println(aktualisKamat);
+        myPortfolio.addNevertek(nevErtek);
+        myPortfolio.addKamat(aktualisKamat);
+    }
+
+}
