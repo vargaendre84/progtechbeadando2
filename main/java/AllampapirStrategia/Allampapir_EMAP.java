@@ -20,10 +20,21 @@ public class Allampapir_EMAP extends AllamPapir
     }
 
     @Override
+    public void setNev(String ujnev) { this.nev = ujnev; }
+
+    @Override
     public void Kamatozas() {
         kamat.Kamatozas();
     }
 
     @Override
     public void KoltsegSzamitas(){koltseg.KoltsegSzamitas();}
+
+    @Override
+    public Object Clone()
+    {
+        Allampapir_EMAP uj = new Allampapir_EMAP(kamat,koltseg,nev);
+        uj.nev = nev;
+        return uj;
+    }
 }

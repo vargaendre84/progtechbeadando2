@@ -14,7 +14,6 @@ public class Kamatozas_Savos_Periodusos_Egyenletes extends KamatozasiStrategia
         this.kamatValtozas = kamatValtozas;
     }
 
-
     @Override
     public void Kamatozas()
     {

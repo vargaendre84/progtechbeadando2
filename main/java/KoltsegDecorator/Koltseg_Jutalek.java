@@ -7,15 +7,12 @@ public class Koltseg_Jutalek extends KoltsegDecorator
 
     @Override
     public String getKoltsegNem() {
-        return alapKoltseg.getKoltsegNem() + " +jutalék ";
+        return alapKoltseg.getKoltsegNem() + " + jutalék ";
     }
 
     @Override
-    public double getKoltseg(int nevErtek, int lejaratiIdo, int futamIdo, boolean befektetesiAlap, boolean ertekpapirSzamla)
+    public double getKoltseg(int nevErtek)
     {
-        if(befektetesiAlap)
-            return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo, befektetesiAlap, ertekpapirSzamla) + nevErtek*alapJutalek;
-        else
-            return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo, befektetesiAlap, ertekpapirSzamla);
+        return alapKoltseg.getKoltseg(nevErtek) + nevErtek*alapJutalek;
     }
 }

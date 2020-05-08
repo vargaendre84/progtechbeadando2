@@ -13,7 +13,7 @@ public class KamatozasEsKoltsegTest
     int kezdoEv = 2020;
 
     AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Kamatozas_Normal(befektetes,1,futamIdo,0.025,false),
-            new KoltsegStrategia(befektetes,1,futamIdo,false,true),
+            new KoltsegStrategia(befektetes,1,futamIdo,true,true),
             "Egy éves magyar Állampapír 2021-18");
 
     AllamPapir PMAP2025J = new Allampapir_PMAP(new Kamatozas_InflacioAlapu(befektetes,5,futamIdo,0.014,false),
@@ -40,10 +40,10 @@ public class KamatozasEsKoltsegTest
         assertEquals(expected2 + expected1, myEgyenleg.getOsszesKamat(),0.0);
     }
 
-    double expected3 = 1000000 * 0.0022;
-    double expected4 = 1000000 * 0.01 + 100000 * 0.2;
+    double expected3 = 1000000 * 0.01 + 1000000 * 0.0022;
+    double expected4 = 1000000 * 0.01 + 1000000 * 0.02;
 
-    @Test
+   @Test
     public void PMAPKoltsegTest() throws Exception
     {
         Assert.assertTrue(true);
@@ -55,7 +55,7 @@ public class KamatozasEsKoltsegTest
     {
         Assert.assertTrue(true);
         EMAP2021_18.KoltsegSzamitas();
-        assertEquals(expected3 + expected4, myEgyenleg.getOsszesKoltseg() ,0.0);
+        assertEquals(expected3+expected4, myEgyenleg.getOsszesKoltseg() ,0.0);
     }
 
     @Test

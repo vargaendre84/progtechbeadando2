@@ -21,23 +21,18 @@ public class Megjelenito extends JFrame {
         this.pack();
 
         final Jegybank jegybank = Jegybank.getInstance();
-        jegybank.nev = "Magyar Nemzeti Bank";
-        jegybank.alapkamat = 0.009;  //2020.03.25.  mnb.hu
-        jegybank.keszpenzallomany = 6620; //milliárd ft,  2020.01.20. mnb.hu
-
         final Allamkincstar allamkincstar = Allamkincstar.getInstance();
-        allamkincstar.allamkincstar = "Magyar Államkincstár";
 
         kincstarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                label1.setText(allamkincstar.allamkincstar);
+                ;
             }
         });
         bankButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                label1.setText(jegybank.nev);
+                ;
             }
         });
         getInfoButton.addActionListener(new ActionListener() {

@@ -12,11 +12,8 @@ public class Koltseg_ErtekPapirSzamla extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(int nevErtek, int lejaratiIdo, int futamIdo, boolean befektetesiAlap, boolean ertekpapirSzamla)
+    public double getKoltseg(int nevErtek)
     {
-        if(ertekpapirSzamla)
-            return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo,befektetesiAlap,ertekpapirSzamla) + nevErtek*ertekpapirSzamlaDij;
-        else
-            return alapKoltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo,befektetesiAlap,ertekpapirSzamla);
+       return alapKoltseg.getKoltseg(nevErtek) + nevErtek*ertekpapirSzamlaDij;
     }
 }

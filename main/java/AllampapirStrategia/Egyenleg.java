@@ -1,10 +1,9 @@
 package Strategy;
 
-public class Egyenleg
+public class Egyenleg    //greedy singleton
 {
     public String portfolio;
     private static final Egyenleg instance = new Egyenleg();
-
     private Egyenleg() {}
     public static Egyenleg getInstance()
     {

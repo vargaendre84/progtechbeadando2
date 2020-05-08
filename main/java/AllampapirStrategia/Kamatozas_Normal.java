@@ -19,7 +19,6 @@ public class Kamatozas_Normal extends KamatozasiStrategia
         this.kamat = kamat;
         this.tbsz = tbsz;
     }
-
     public Kamatozas_Normal()
     {
         this.nevErtek = 1000000;

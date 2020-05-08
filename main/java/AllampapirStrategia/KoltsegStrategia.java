@@ -22,9 +22,23 @@ public class KoltsegStrategia
 
     public void KoltsegSzamitas()
     {
-        IKoltseg koltseg = new Koltseg_VisszaValtas(new Koltseg_Jutalek(new Koltseg_ErtekPapirSzamla(new Koltseg_Alap())));
+        IKoltseg koltseg = new Koltseg_Alap();
+        if((lejaratiIdo > futamIdo) && befektetesiAlap && ertekpapirSzamla)
+            koltseg = new Koltseg_VisszaValtas(new Koltseg_Jutalek(new Koltseg_ErtekPapirSzamla(new Koltseg_Alap())));
+        if((lejaratiIdo > futamIdo) && !befektetesiAlap && ertekpapirSzamla)
+            koltseg = new Koltseg_VisszaValtas(new Koltseg_ErtekPapirSzamla(new Koltseg_Alap()));
+        if((lejaratiIdo > futamIdo) && befektetesiAlap && !ertekpapirSzamla)
+            koltseg = new Koltseg_VisszaValtas(new Koltseg_Jutalek(new Koltseg_Alap()));
+        if((lejaratiIdo > futamIdo) && !befektetesiAlap && !ertekpapirSzamla)
+            koltseg = new Koltseg_VisszaValtas(new Koltseg_Alap());
+        if(!(lejaratiIdo > futamIdo) && befektetesiAlap && ertekpapirSzamla)
+            koltseg = new Koltseg_Jutalek(new Koltseg_ErtekPapirSzamla(new Koltseg_Alap()));
+        if(!(lejaratiIdo > futamIdo) && !(befektetesiAlap) && ertekpapirSzamla)
+            koltseg = new Koltseg_ErtekPapirSzamla(new Koltseg_Alap());
+        if(!(lejaratiIdo > futamIdo) && !(befektetesiAlap) && !(ertekpapirSzamla))
+            koltseg = new Koltseg_Alap();
         System.out.println(koltseg.getKoltsegNem());
-        double aktualisKoltseg = koltseg.getKoltseg(nevErtek,lejaratiIdo,futamIdo,befektetesiAlap,ertekpapirSzamla);
+        double aktualisKoltseg = koltseg.getKoltseg(nevErtek);
         System.out.println("Költség: " + aktualisKoltseg);
         myEgyenleg.addKoltseg(aktualisKoltseg);
     }
