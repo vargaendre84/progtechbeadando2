@@ -1,4 +1,4 @@
-package Decorator;
+package KoltsegDecorator;
 
 public interface IKoltseg
 {

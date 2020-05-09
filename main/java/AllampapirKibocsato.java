@@ -1,20 +1,20 @@
-import Strategy.AllamPapir;
+import AllampapirStrategia.AllamPapir;
 
 public class AllampapirKibocsato
 {
-    private static int cimlet = 100000;  //
-    private static int allamPapironkentiLimit = 1000000;
+    private static int cimletekMaxSzama = Cimlet.getCimletekMaxSzama();
 
     public AllamPapir[] kibocsatas(AllamPapir allampapir, String nev, int cimletekSzama)
     {
-        if (cimletekSzama > allamPapironkentiLimit)  cimletekSzama = allamPapironkentiLimit;
+        if (cimletekSzama > cimletekMaxSzama)  cimletekSzama = cimletekMaxSzama;
         AllamPapir[] temp = new AllamPapir[cimletekSzama];
         for (int i = 0; i < cimletekSzama; i++)
         {
             temp[i] = (AllamPapir)allampapir.Clone();
             temp[i].setNev(nev);
         }
-        System.out.println(cimletekSzama + " címletnyi állampapír lett kibocsájtva: " + cimletekSzama /10 + " millió Ft értékben");
+        int mennyiseg = temp.length;
+        System.out.println(mennyiseg + " címletnyi " + nev + " állampapír lett kibocsájtva: " + mennyiseg /10 + " millió Ft értékben");
         return temp;
     }
 }

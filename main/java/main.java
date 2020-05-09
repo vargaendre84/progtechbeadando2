@@ -1,5 +1,5 @@
-import Observer.*;
-import Strategy.*;
+import ArfolyamObserver.*;
+import AllampapirStrategia.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,13 +12,13 @@ public class main {
         final Allamkincstar allamkincstar = Allamkincstar.getInstance();
         final Egyenleg myEgyenleg = Egyenleg.getInstance();
 
-        int cimlet = 100000;
-        int cimletekSzama = 1000000;
-        int befektetes1 = 2300000;
-        int befektetes2 = 1900000;
+        int befektetes1 = 10000000;
+        int befektetes2 = 3000000;
         int futamIdo = 3;
         double aktualisEURArfolyam = 360.0;
         double aktualisUSDArfolyam = 321.0;
+        int cimletErtek = Cimlet.getCimletErtek();
+        int cimletekMaxSzama = Cimlet.getCimletekMaxSzama();
 
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));
@@ -45,18 +45,23 @@ public class main {
         dollarValuta.Display();
 
         AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Kamatozas_Normal(befektetes1,1,futamIdo,0.025,false),
-                new KoltsegStrategia(befektetes1,1,futamIdo,false,true),
+                new KoltsegStrategia_Allampapir(befektetes1,1,futamIdo,false,true),
                 "EMAP 2021-18");
         AllamPapir PMAP2025J = new Allampapir_PMAP(new Kamatozas_InflacioAlapu(befektetes2,5,futamIdo,0.014,false),
-                new KoltsegStrategia(befektetes2,5,futamIdo,true,false),
+                new KoltsegStrategia_Allampapir(befektetes2,5,futamIdo,true,false),
                 "PMAP 2025-J");
 
-        AllampapirKibocsato akk = new AllampapirKibocsato();
-        AllamPapir[] emapsorozat = akk.kibocsatas(EMAP2021_18,"EMAP 2021-18",cimletekSzama);
-        AllamPapir[] pmapsorozat = akk.kibocsatas(PMAP2025J,"PMAP 2025-J",cimletekSzama);
+        BankBetet otpBankBetet = new BankBetet(new Kamatozas_Normal(befektetes1,1,futamIdo,0.0001,false),
+                new KoltsegStrategia_Bank(befektetes1,futamIdo),
+                "OTP BankBetét");
+        Valuta_HUF otthonitrezor = new Valuta_HUF(new KoltsegStrategia_KP(befektetes2), "Otthoni trezor");
 
-        allamkincstar.AllamPapirKibocsatas_EMAP(cimletekSzama*cimlet);
-        allamkincstar.AllamPapirKibocsatas_PMAP(cimletekSzama*cimlet);
+        AllampapirKibocsato akk = new AllampapirKibocsato();
+        AllamPapir[] emapsorozat = akk.kibocsatas(EMAP2021_18,"EMAP 2021-18",cimletekMaxSzama);
+        AllamPapir[] pmapsorozat = akk.kibocsatas(PMAP2025J,"PMAP 2025-J",cimletekMaxSzama);
+
+        allamkincstar.AllamPapirKibocsatas_EMAP((long)cimletekMaxSzama*cimletErtek);
+        allamkincstar.AllamPapirKibocsatas_PMAP((long)cimletekMaxSzama*cimletErtek);
         allamkincstar.AllamPapirErtekesítes_EMAP(befektetes1);
         allamkincstar.AllamPapirErtekesítes_PMAP(befektetes2);
         System.out.println("Kibocsátott PMÁP állomány:" + allamkincstar.getKibocsatottPMAPAllomany()/1000 + " ezer Ft");
@@ -74,6 +79,13 @@ public class main {
         PMAP2025J.getNev();
         PMAP2025J.Kamatozas();
         PMAP2025J.KoltsegSzamitas();
+
+        otpBankBetet.getNev();
+        otpBankBetet.Kamatozas();
+        otpBankBetet.KoltsegSzamitas();
+
+        otthonitrezor.getNev();
+        otthonitrezor.KoltsegSzamitas();
 
         System.out.println("A portfólió összes névértéke= " + myEgyenleg.getOsszesNevErtek());
         System.out.println("A portfólió összes kamata= " + myEgyenleg.getOsszesKamat());

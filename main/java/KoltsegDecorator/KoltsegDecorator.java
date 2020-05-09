@@ -1,4 +1,4 @@
-package Decorator;
+package KoltsegDecorator;
 
 abstract class KoltsegDecorator implements IKoltseg
 {

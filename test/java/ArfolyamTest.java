@@ -1,6 +1,6 @@
-import Observer.Arfolyam_Euro;
-import Observer.Arfolyam_USD;
-import Observer.Penzvalto;
+import ArfolyamObserver.Arfolyam_Euro;
+import ArfolyamObserver.Arfolyam_USD;
+import ArfolyamObserver.Penzvalto;
 import org.junit.Test;
 import org.junit.Assert;
 

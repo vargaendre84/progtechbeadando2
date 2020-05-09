@@ -1,19 +1,27 @@
 import AllampapirStrategia.KamatozasiStrategia;
 import AllampapirStrategia.KoltsegStrategia;
 
-public class Valuta_HUF
+public class BankBetet
 {
+    KamatozasiStrategia kamat;
     KoltsegStrategia koltseg;
     private String nev;
 
-    public Valuta_HUF(KoltsegStrategia koltseg, String nev)
+    public BankBetet(KamatozasiStrategia kamat, KoltsegStrategia koltseg, String nev)
     {
+        this.kamat = kamat;
         this.koltseg = koltseg;
         this.nev = nev;
     }
+
     public void getNev()
     {
-        System.out.println(nev);
+        System.out.println("Bankbetét neve: " + nev);
     }
+
+    public void Kamatozas() {
+        kamat.Kamatozas();
+    }
+
     public void KoltsegSzamitas(){koltseg.KoltsegSzamitas();}
 }

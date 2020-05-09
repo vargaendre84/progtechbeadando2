@@ -1,0 +1,19 @@
+package KoltsegDecorator;
+
+public class Koltseg_Szef extends KoltsegDecorator
+{
+    private static int szefBeszerzesiKoltseg = 120000;
+    private static int szefBeszerelesiKoltseg = 250000;
+
+    public Koltseg_Szef(IKoltseg alapKoltseg) {super(alapKoltseg);}
+
+    @Override
+    public String getKoltsegNem() {
+        return alapKoltseg.getKoltsegNem() + " + széf vásárlási és beszerelési költsége ";
+    }
+
+    @Override
+    public double getKoltseg(int nevErtek) {
+        return alapKoltseg.getKoltseg(nevErtek) + szefBeszerzesiKoltseg + szefBeszerelesiKoltseg;
+    }
+}

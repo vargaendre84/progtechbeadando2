@@ -1,6 +1,4 @@
-import Observer.*;
-import Decorator.*;
-import Strategy.*;
+import AllampapirStrategia.*;
 import org.junit.Test;
 import org.junit.Assert;
 import static org.junit.Assert.*;
@@ -13,11 +11,11 @@ public class KamatozasEsKoltsegTest
     int kezdoEv = 2020;
 
     AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Kamatozas_Normal(befektetes,1,futamIdo,0.025,false),
-            new KoltsegStrategia(befektetes,1,futamIdo,true,true),
+            new KoltsegStrategia_Allampapir(befektetes,1,futamIdo,true,true),
             "Egy éves magyar Állampapír 2021-18");
 
     AllamPapir PMAP2025J = new Allampapir_PMAP(new Kamatozas_InflacioAlapu(befektetes,5,futamIdo,0.014,false),
-            new KoltsegStrategia(befektetes,5,futamIdo,true,false),
+            new KoltsegStrategia_Allampapir(befektetes,5,futamIdo,true,false),
             "Prémium Magyar Állampapír 2025-J");;
 
     double expected1 = 1000000 * 0.025 * (1-0.15) * 3;

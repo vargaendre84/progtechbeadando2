@@ -1,4 +1,4 @@
-package Observer;
+package ArfolyamObserver;
 
 public class Arfolyam_USD implements IDisplay,IObserver
 {

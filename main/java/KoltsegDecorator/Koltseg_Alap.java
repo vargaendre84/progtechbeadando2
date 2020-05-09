@@ -1,4 +1,4 @@
-package Decorator;
+package KoltsegDecorator;
 
 public class Koltseg_Alap implements IKoltseg
 {

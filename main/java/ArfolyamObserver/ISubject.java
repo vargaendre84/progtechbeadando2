@@ -1,4 +1,4 @@
-package Observer;
+package ArfolyamObserver;
 
 public interface ISubject
 {

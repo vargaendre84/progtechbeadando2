@@ -1,4 +1,4 @@
-package Observer;
+package ArfolyamObserver;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package Strategy;
+package AllampapirStrategia;
 
 public abstract class AllamPapir implements IAllamPapir
 {

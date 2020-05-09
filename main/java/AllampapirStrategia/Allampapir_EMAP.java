@@ -1,4 +1,4 @@
-package Strategy;
+package AllampapirStrategia;
 
 public class Allampapir_EMAP extends AllamPapir
 {

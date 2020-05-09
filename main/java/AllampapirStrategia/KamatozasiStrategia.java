@@ -1,6 +1,6 @@
-package Strategy;
+package AllampapirStrategia;
 
-abstract class KamatozasiStrategia
+public abstract class KamatozasiStrategia
 {
     public abstract void Kamatozas();
 }
