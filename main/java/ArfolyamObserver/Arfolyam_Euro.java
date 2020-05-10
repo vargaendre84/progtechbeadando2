@@ -17,7 +17,7 @@ public class Arfolyam_Euro implements IObserver, IDisplay
         this.eurArfolyam = eurArfolyam;
     }
 
-    public double getEuroArfolyam()
+    public double getArfolyam()
     {
         return eurArfolyam;
     }

@@ -4,7 +4,6 @@ public class Koltseg_Szef extends KoltsegDecorator
 {
     private static int szefBeszerzesiKoltseg = 120000;
     private static int szefBeszerelesiKoltseg = 250000;
-
     public Koltseg_Szef(IKoltseg alapKoltseg) {super(alapKoltseg);}
 
     @Override
@@ -13,7 +12,7 @@ public class Koltseg_Szef extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(int nevErtek) {
+    public double getKoltseg(long nevErtek) {
         return alapKoltseg.getKoltseg(nevErtek) + szefBeszerzesiKoltseg + szefBeszerelesiKoltseg;
     }
 }

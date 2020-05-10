@@ -1,5 +1,9 @@
 import ArfolyamObserver.*;
 import AllampapirStrategia.*;
+import Portfolio.Egyenleg;
+import ValutaStrategia.Valuta_EUR;
+import ValutaStrategia.Valuta_HUF;
+import ValutaStrategia.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,8 +16,8 @@ public class main {
         final Allamkincstar allamkincstar = Allamkincstar.getInstance();
         final Egyenleg myEgyenleg = Egyenleg.getInstance();
 
-        int befektetes1 = 10000000;
-        int befektetes2 = 3000000;
+        long befektetes1 = 10000000;
+        long befektetes2 = 3000000;
         int futamIdo = 3;
         double aktualisEURArfolyam = 360.0;
         double aktualisUSDArfolyam = 321.0;
@@ -53,8 +57,14 @@ public class main {
 
         BankBetet otpBankBetet = new BankBetet(new Kamatozas_Normal(befektetes1,1,futamIdo,0.0001,false),
                 new KoltsegStrategia_Bank(befektetes1,futamIdo),
-                "OTP BankBetét");
-        Valuta_HUF otthonitrezor = new Valuta_HUF(new KoltsegStrategia_KP(befektetes2), "Otthoni trezor");
+                "OTP BankBetét 2020 Április");
+        Valutak otthonitrezor = new Valuta_HUF(new KoltsegStrategia_KP(befektetes2), "Otthoni trezor");
+        Valutak otthonitrezorEur = new Valuta_EUR(new ArfolyamStrategia_EUR(befektetes1/330,330.0,aktualisEURArfolyam),
+                new KoltsegStrategia_KP(befektetes1),
+                "Euró beszerzés 2020.02.20.");
+        Valutak otthonitrezorUSD = new Valuta_USD(new ArfolyamStrategia_USD(befektetes2/335,335.0,aktualisUSDArfolyam),
+                new KoltsegStrategia_KP(befektetes2),
+                "USD beszerzés 2020.04.21.");
 
         AllampapirKibocsato akk = new AllampapirKibocsato();
         AllamPapir[] emapsorozat = akk.kibocsatas(EMAP2021_18,"EMAP 2021-18",cimletekMaxSzama);
@@ -86,6 +96,12 @@ public class main {
 
         otthonitrezor.getNev();
         otthonitrezor.KoltsegSzamitas();
+        otthonitrezorEur.getNev();
+        otthonitrezorEur.ArfolyamNyereseg();
+        otthonitrezorEur.KoltsegSzamitas();
+        otthonitrezorUSD.getNev();
+        otthonitrezorUSD.ArfolyamNyereseg();
+        otthonitrezorUSD.KoltsegSzamitas();
 
         System.out.println("A portfólió összes névértéke= " + myEgyenleg.getOsszesNevErtek());
         System.out.println("A portfólió összes kamata= " + myEgyenleg.getOsszesKamat());

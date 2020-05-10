@@ -1,4 +1,5 @@
 import AllampapirStrategia.*;
+import Portfolio.Egyenleg;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -6,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class NevErtekTest
 {
     final Egyenleg myEgyenleg = Egyenleg.getInstance();
-    int befektetes = 1000000;
+    long befektetes = 1000000;
     int futamIdo = 3;
     int kezdoEv = 2020;
 

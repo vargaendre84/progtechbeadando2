@@ -1,9 +1,10 @@
 package AllampapirStrategia;
 import KoltsegDecorator.*;
+import Portfolio.Egyenleg;
 
 public class KoltsegStrategia_Allampapir extends KoltsegStrategia
 {
-    private int nevErtek;
+    private long nevErtek;
     private int lejaratiIdo;
     private int futamIdo;
     private boolean befektetesiAlap;
@@ -11,7 +12,7 @@ public class KoltsegStrategia_Allampapir extends KoltsegStrategia
 
     Egyenleg myEgyenleg = Egyenleg.getInstance();
 
-    public KoltsegStrategia_Allampapir(int nevErtek, int lejaratiIdo, int futamIdo, boolean befektetesiAlap, boolean ertekpapirSzamla)
+    public KoltsegStrategia_Allampapir(long nevErtek, int lejaratiIdo, int futamIdo, boolean befektetesiAlap, boolean ertekpapirSzamla)
     {
         this.nevErtek = nevErtek;
         this.lejaratiIdo = lejaratiIdo;

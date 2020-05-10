@@ -1,14 +1,15 @@
 package ValutaStrategia;
-
 import AllampapirStrategia.KoltsegStrategia;
 
-public class Valuta_HUF extends Valutak
+public class Valuta_EUR extends Valutak
 {
+    ArfolyamStrategia arfolyam;
     KoltsegStrategia koltseg;
     private String nev;
 
-    public Valuta_HUF(KoltsegStrategia koltseg, String nev)
+    public Valuta_EUR(ArfolyamStrategia arfolyam,KoltsegStrategia koltseg, String nev)
     {
+        this.arfolyam = arfolyam;
         this.koltseg = koltseg;
         this.nev = nev;
     }
@@ -19,7 +20,7 @@ public class Valuta_HUF extends Valutak
     }
 
     @Override
-    public void ArfolyamNyereseg(){}
+    public void ArfolyamNyereseg(){arfolyam.ArfolyamNyereseg();}
 
     @Override
     public void KoltsegSzamitas(){koltseg.KoltsegSzamitas();}

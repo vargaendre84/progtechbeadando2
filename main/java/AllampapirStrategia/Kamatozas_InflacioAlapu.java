@@ -1,8 +1,9 @@
 package AllampapirStrategia;
+import Portfolio.Egyenleg;
 
 public class Kamatozas_InflacioAlapu extends KamatozasiStrategia
 {
-    private int nevErtek;
+    private long nevErtek;
     private int lejaratiIdo;
     private int futamIdo;
     private double kamatPremium;
@@ -12,7 +13,7 @@ public class Kamatozas_InflacioAlapu extends KamatozasiStrategia
     Inflacio inflacio = new Inflacio();
     Egyenleg myEgyenleg = Egyenleg.getInstance();
 
-    public Kamatozas_InflacioAlapu(int nevErtek, int lejaratiIdo, int futamIdo, double kamatPremium, boolean tbsz)
+    public Kamatozas_InflacioAlapu(long nevErtek, int lejaratiIdo, int futamIdo, double kamatPremium, boolean tbsz)
     {
         this.nevErtek = nevErtek;
         this.lejaratiIdo = lejaratiIdo;

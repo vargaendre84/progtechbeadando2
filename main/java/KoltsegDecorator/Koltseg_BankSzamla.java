@@ -12,7 +12,7 @@ public class Koltseg_BankSzamla extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(int nevErtek)
+    public double getKoltseg(long nevErtek)
     {
         return alapKoltseg.getKoltseg(nevErtek) + bankSzamlaDij;
     }

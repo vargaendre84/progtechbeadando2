@@ -11,7 +11,7 @@ public class Koltseg_Jutalek extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(int nevErtek)
+    public double getKoltseg(long nevErtek)
     {
         return alapKoltseg.getKoltseg(nevErtek) + nevErtek*alapJutalek;
     }
