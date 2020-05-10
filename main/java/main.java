@@ -54,6 +54,9 @@ public class main {
         AllamPapir PMAP2025J = new Allampapir_PMAP(new Kamatozas_InflacioAlapu(befektetes2,5,futamIdo,0.014,false),
                 new KoltsegStrategia_Allampapir(befektetes2,5,futamIdo,true,false),
                 "PMAP 2025-J");
+        AllamPapir MAPPluszN2025_19 = new Allampapir_MAPPlusz(new Kamatozas_Savos_Periodusos_Egyenletes(befektetes2,5,futamIdo,0.035,1,0.005),
+                new KoltsegStrategia_Allampapir(befektetes2,5,futamIdo,false,false),
+                "MAP Plusz N2025/19");
 
         BankBetet otpBankBetet = new BankBetet(new Kamatozas_Normal(befektetes1,1,futamIdo,0.0001,false),
                 new KoltsegStrategia_Bank(befektetes1,futamIdo),
@@ -72,23 +75,29 @@ public class main {
 
         allamkincstar.AllamPapirKibocsatas_EMAP((long)cimletekMaxSzama*cimletErtek);
         allamkincstar.AllamPapirKibocsatas_PMAP((long)cimletekMaxSzama*cimletErtek);
+        allamkincstar.AllamPapirKibocsatas_MAPPlusz((long)cimletekMaxSzama*cimletErtek/2);
         allamkincstar.AllamPapirErtekesítes_EMAP(befektetes1);
         allamkincstar.AllamPapirErtekesítes_PMAP(befektetes2);
+        allamkincstar.AllamPapirErtekesítes_MAPPlusz(befektetes1);
+
         System.out.println("Kibocsátott PMÁP állomány:" + allamkincstar.getKibocsatottPMAPAllomany()/1000 + " ezer Ft");
         System.out.println("Kibocsátott EMÁP állomány:" + allamkincstar.getKibocsatottEMAPAllomany()/1000 + " ezer Ft");
         System.out.println("Kibocsátott MÁPPlusz állomány:" + allamkincstar.getKibocsatottMapPluszAllomany()/1000 + " ezer Ft");
         System.out.println("Értékesített PMÁP állomány:" + allamkincstar.getErtekesitettPMAPAllomany());
         System.out.println("Értékesített EMÁP állomány:" + allamkincstar.getErtekesitettEMAPAllomany());
+        System.out.println("Értékesített MÁP Plusz állomány:" + allamkincstar.getErtekesitettMAPPluszAllomany());
 
         myEgyenleg.addNevertek(befektetes1+befektetes2);
 
         EMAP2021_18.getNev();
         EMAP2021_18.Kamatozas();
         EMAP2021_18.KoltsegSzamitas();
-
         PMAP2025J.getNev();
         PMAP2025J.Kamatozas();
         PMAP2025J.KoltsegSzamitas();
+        MAPPluszN2025_19.getNev();
+        MAPPluszN2025_19.Kamatozas();
+        MAPPluszN2025_19.KoltsegSzamitas();
 
         otpBankBetet.getNev();
         otpBankBetet.Kamatozas();

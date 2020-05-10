@@ -1,10 +1,6 @@
 import AllampapirStrategia.Kamatozas_Normal;
 import AllampapirStrategia.KoltsegStrategia_Bank;
-import AllampapirStrategia.KoltsegStrategia_KP;
 import Portfolio.Egyenleg;
-import ValutaStrategia.ArfolyamStrategia_USD;
-import ValutaStrategia.Valuta_USD;
-import ValutaStrategia.Valutak;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
