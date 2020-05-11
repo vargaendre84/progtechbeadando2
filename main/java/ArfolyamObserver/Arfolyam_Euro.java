@@ -12,10 +12,7 @@ public class Arfolyam_Euro implements IObserver, IDisplay
     }
 
     @Override
-    public void Update(double eurArfolyam, double usdArfolyam)
-    {
-        this.eurArfolyam = eurArfolyam;
-    }
+    public void Update(double eurArfolyam, double usdArfolyam, double kriptoETHArfolyam) { this.eurArfolyam = eurArfolyam; }
 
     public double getArfolyam()
     {

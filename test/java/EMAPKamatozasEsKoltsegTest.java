@@ -10,8 +10,8 @@ public class EMAPKamatozasEsKoltsegTest
     int befektetes = 1000000;
     int futamIdo = 3;
 
-    AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Kamatozas_Normal(befektetes,1,futamIdo,0.025,false),
-            new KoltsegStrategia_Allampapir(befektetes,1,futamIdo,true,true),
+    AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Vasarlas_EMAP(befektetes), new Kamatozas_Normal(befektetes,futamIdo,0.025,false),
+            new KoltsegStrategia_Allampapir_EPSZ(befektetes,1,futamIdo),
             "Egy éves magyar Állampapír 2021-18");
     double expected1 = 1000000 * 0.025 * (1-0.15) * 3;
 
@@ -23,7 +23,7 @@ public class EMAPKamatozasEsKoltsegTest
         assertEquals(expected1, myEgyenleg.getOsszesKamat(),0.0);
     }
 
-    double expected3 = 1000000 * 0.01 + 1000000 * 0.0022;
+    double expected3 = 1000000 * 0.0022 *3 ;
     @Test
     public void EMAPKoltsegTest() throws Exception
     {

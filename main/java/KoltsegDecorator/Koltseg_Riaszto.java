@@ -14,7 +14,8 @@ public class Koltseg_Riaszto extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(long nevErtek) {
-        return alapKoltseg.getKoltseg(nevErtek) + riasztoBeszerzesiKoltseg + riasztoBeszerelesiKoltseg + riasztoUzemeltetesiKoltsegEvente;
+    public double getKoltseg(long nevErtek, int futamIdo) {
+        return alapKoltseg.getKoltseg(nevErtek, futamIdo)
+                + riasztoBeszerzesiKoltseg + riasztoBeszerelesiKoltseg + riasztoUzemeltetesiKoltsegEvente*futamIdo;
     }
 }

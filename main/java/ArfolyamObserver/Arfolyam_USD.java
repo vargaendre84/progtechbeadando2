@@ -12,7 +12,7 @@ public class Arfolyam_USD implements IDisplay,IObserver
     }
 
     @Override
-    public void Update(double eurArfolyam, double usdArfolyam)
+    public void Update(double eurArfolyam, double usdArfolyam,double kriptoETHArfolyam)
     {
         this.usdArfolyam = usdArfolyam;
     }

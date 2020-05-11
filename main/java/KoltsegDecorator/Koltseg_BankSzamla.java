@@ -4,6 +4,7 @@ public class Koltseg_BankSzamla extends KoltsegDecorator
 {
     public Koltseg_BankSzamla(IKoltseg alapKoltseg) {super(alapKoltseg);}
     private int bankSzamlaDij = 20000;  //OTP abn kszámla díj
+    private int futamIdo = 1;
 
     @Override
     public String getKoltsegNem()
@@ -12,8 +13,8 @@ public class Koltseg_BankSzamla extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(long nevErtek)
+    public double getKoltseg(long nevErtek,int futamIdo)
     {
-        return alapKoltseg.getKoltseg(nevErtek) + bankSzamlaDij;
+        return alapKoltseg.getKoltseg(nevErtek,futamIdo) + bankSzamlaDij*futamIdo;
     }
 }

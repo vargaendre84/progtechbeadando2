@@ -6,5 +6,5 @@ public class Koltseg_Alap implements IKoltseg
     public String getKoltsegNem() { return "Pénzügyi eszköz költsége: "; }
 
     @Override
-    public double getKoltseg(long nevErtek){ return 0; }
+    public double getKoltseg(long nevErtek,int futamIdo){ return 0; }
 }

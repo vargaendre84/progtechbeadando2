@@ -1,6 +1,9 @@
 import ArfolyamObserver.*;
 import AllampapirStrategia.*;
+import Intezmenyek.Allamkincstar;
+import Intezmenyek.Jegybank;
 import Portfolio.Egyenleg;
+import Portfolio.Kereskedes;
 import ValutaStrategia.Valuta_EUR;
 import ValutaStrategia.Valuta_HUF;
 import ValutaStrategia.*;
@@ -12,17 +15,30 @@ public class main {
 
     public static void main(String[] args) throws IOException
     {
-        final Jegybank jegybank = Jegybank.getInstance();
-        final Allamkincstar allamkincstar = Allamkincstar.getInstance();
-        final Egyenleg myEgyenleg = Egyenleg.getInstance();
+        Jegybank jegybank = Jegybank.getInstance();
+        Allamkincstar allamkincstar = Allamkincstar.getInstance();
+        Egyenleg myEgyenleg = Egyenleg.getInstance();
+        Kereskedes kereskedes = Kereskedes.getInstance();
 
         long befektetes1 = 10000000;
-        long befektetes2 = 3000000;
+        long befektetes2 = 30000000;
         int futamIdo = 3;
+        int lejaratiIdo1 = 1;
+        int lejaratiIdo5 = 5;
+        double alapkamat25 = 0.025;
+        double alapkamat35 = 0.035;
+        double kamatpremium = 0.014;
+        double bankikamat = 0.0001;
+        double kamatvaltozas = 0.005;
+        double veteliEURArfolyam = 335.0;
+        double veteliUSDArfolyam = 328;
+        double veteliETHArfolyam = 65570;
         double aktualisEURArfolyam = 360.0;
         double aktualisUSDArfolyam = 321.0;
-        int cimletErtek = Cimlet.getCimletErtek();
-        int cimletekMaxSzama = Cimlet.getCimletekMaxSzama();
+        double aktualisETHArfolyam = 67539.85;
+        int banyaszandoKriptoValuta = 1000;
+        int cimletErtek = allamkincstar.getCimletErtek();
+        int cimletekMaxSzama = allamkincstar.getCimletekMaxSzama();
 
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));
@@ -34,71 +50,70 @@ public class main {
         System.out.println("Melyik évben szeretné megvenni a papírt? ");
         kezdoEv = Integer.parseInt(reader.readLine());
     */
+        System.out.println("");
         Penzvalto penzvalto = new Penzvalto();
         Arfolyam_Euro euroValuta = new Arfolyam_Euro(penzvalto);
         Arfolyam_USD dollarValuta = new Arfolyam_USD(penzvalto);
+        Arfolyam_Kripto_Ethereum ethValuta = new Arfolyam_Kripto_Ethereum(penzvalto);
 
         /*System.out.print("Adja meg az aktuális EUR vételi árfolyamot: ");
         aktualisEURArfolyam = Double.parseDouble(reader.readLine());
         System.out.print("Adja meg az aktuális USD vételi árfolyamot: ");
         aktualisUSDArfolyam = Double.parseDouble(reader.readLine());*/
-        penzvalto.ArfolyamBeallitas(aktualisEURArfolyam,aktualisUSDArfolyam);
+        penzvalto.ArfolyamBeallitas(aktualisEURArfolyam,aktualisUSDArfolyam,aktualisETHArfolyam);
 
-        System.out.println("Aktuális EUR és USD árfolyam frissítve: ");
+        System.out.println("Aktuális EUR, USD és ETH árfolyam frissítve: ");
         euroValuta.Display();
         dollarValuta.Display();
+        ethValuta.Display();
 
-        AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Kamatozas_Normal(befektetes1,1,futamIdo,0.025,false),
-                new KoltsegStrategia_Allampapir(befektetes1,1,futamIdo,false,true),
+        allamkincstar.AllamPapirKibocsatas_PMAP(cimletErtek * cimletekMaxSzama);
+        allamkincstar.AllamPapirKibocsatas_EMAP(cimletErtek * cimletekMaxSzama);
+        allamkincstar.AllamPapirKibocsatas_MAPPlusz(cimletErtek * cimletekMaxSzama / 2);
+
+        System.out.println("");
+        AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Vasarlas_EMAP(befektetes1), new Kamatozas_Normal(befektetes1,futamIdo,alapkamat25,false),
+                new KoltsegStrategia_Allampapir_JutalekEPSZ(befektetes1,lejaratiIdo1,futamIdo),
                 "EMAP 2021-18");
-        AllamPapir PMAP2025J = new Allampapir_PMAP(new Kamatozas_InflacioAlapu(befektetes2,5,futamIdo,0.014,false),
-                new KoltsegStrategia_Allampapir(befektetes2,5,futamIdo,true,false),
+        AllamPapir PMAP2025J = new Allampapir_PMAP(new Vasarlas_PMAP(befektetes2), new Kamatozas_InflacioAlapu(befektetes2,lejaratiIdo5,futamIdo,kamatpremium,false),
+                new KoltsegStrategia_Allampapir_Jutalek(befektetes2,lejaratiIdo5,futamIdo),
                 "PMAP 2025-J");
-        AllamPapir MAPPluszN2025_19 = new Allampapir_MAPPlusz(new Kamatozas_Savos_Periodusos_Egyenletes(befektetes2,5,futamIdo,0.035,1,0.005),
-                new KoltsegStrategia_Allampapir(befektetes2,5,futamIdo,false,false),
+        AllamPapir MAPPluszN2025_19 = new Allampapir_MAPPlusz(new Vasarlas_MAPPlusz(befektetes2), new Kamatozas_Savos_Periodusos_Egyenletes(befektetes2,lejaratiIdo5,futamIdo,alapkamat35,lejaratiIdo1,kamatvaltozas),
+                new KoltsegStrategia_Allampapir_Jutalek(befektetes2,lejaratiIdo5,futamIdo),
                 "MAP Plusz N2025/19");
 
-        BankBetet otpBankBetet = new BankBetet(new Kamatozas_Normal(befektetes1,1,futamIdo,0.0001,false),
+        BankBetet otpBankBetet = new BankBetet(new Kamatozas_Normal(befektetes1,futamIdo,bankikamat,false),
                 new KoltsegStrategia_Bank(befektetes1,futamIdo),
                 "OTP BankBetét 2020 Április");
-        Valutak otthonitrezor = new Valuta_HUF(new KoltsegStrategia_KP(befektetes2), "Otthoni trezor");
-        Valutak otthonitrezorEur = new Valuta_EUR(new ArfolyamStrategia_EUR(befektetes1/330,330.0,aktualisEURArfolyam),
-                new KoltsegStrategia_KP(befektetes1),
+        Valutak otthonitrezor = new Valuta_HUF(new KoltsegStrategia_KP(befektetes1), "Otthoni trezor");
+        Valutak otthonitrezorEur = new Valuta_EUR(new ArfolyamStrategia_EUR(befektetes2/(long)veteliEURArfolyam,veteliEURArfolyam,aktualisEURArfolyam),
+                new KoltsegStrategia_KP(befektetes2),
                 "Euró beszerzés 2020.02.20.");
-        Valutak otthonitrezorUSD = new Valuta_USD(new ArfolyamStrategia_USD(befektetes2/335,335.0,aktualisUSDArfolyam),
+        Valutak otthonitrezorUSD = new Valuta_USD(new ArfolyamStrategia_USD(befektetes2/(long)veteliUSDArfolyam,veteliUSDArfolyam,aktualisUSDArfolyam),
                 new KoltsegStrategia_KP(befektetes2),
                 "USD beszerzés 2020.04.21.");
 
-        AllampapirKibocsato akk = new AllampapirKibocsato();
-        AllamPapir[] emapsorozat = akk.kibocsatas(EMAP2021_18,"EMAP 2021-18",cimletekMaxSzama);
-        AllamPapir[] pmapsorozat = akk.kibocsatas(PMAP2025J,"PMAP 2025-J",cimletekMaxSzama);
+        KriptoValuta ethereum2020 = new Kripto_Ethereum(new ArfolyamStrategia_Kripto_Ethereum(befektetes1/(long)veteliETHArfolyam,veteliETHArfolyam,aktualisETHArfolyam),
+                new KoltsegStrategia_Allampapir_EPSZ(befektetes1,lejaratiIdo1,futamIdo),"Ethereum befektetés 2020");
+        Banyaszat banyagep1 = new Banyaszat();
+        KriptoValuta[] ethSorozat = banyagep1.kibocsatas(ethereum2020,"Ethereum kriptovaluta",banyaszandoKriptoValuta);
+        System.out.println(ethSorozat.length + " egységnyi Ether létrehozva");
 
-        allamkincstar.AllamPapirKibocsatas_EMAP((long)cimletekMaxSzama*cimletErtek);
-        allamkincstar.AllamPapirKibocsatas_PMAP((long)cimletekMaxSzama*cimletErtek);
-        allamkincstar.AllamPapirKibocsatas_MAPPlusz((long)cimletekMaxSzama*cimletErtek/2);
-        allamkincstar.AllamPapirErtekesítes_EMAP(befektetes1);
-        allamkincstar.AllamPapirErtekesítes_PMAP(befektetes2);
-        allamkincstar.AllamPapirErtekesítes_MAPPlusz(befektetes1);
-
-        System.out.println("Kibocsátott PMÁP állomány:" + allamkincstar.getKibocsatottPMAPAllomany()/1000 + " ezer Ft");
-        System.out.println("Kibocsátott EMÁP állomány:" + allamkincstar.getKibocsatottEMAPAllomany()/1000 + " ezer Ft");
-        System.out.println("Kibocsátott MÁPPlusz állomány:" + allamkincstar.getKibocsatottMapPluszAllomany()/1000 + " ezer Ft");
-        System.out.println("Értékesített PMÁP állomány:" + allamkincstar.getErtekesitettPMAPAllomany());
-        System.out.println("Értékesített EMÁP állomány:" + allamkincstar.getErtekesitettEMAPAllomany());
-        System.out.println("Értékesített MÁP Plusz állomány:" + allamkincstar.getErtekesitettMAPPluszAllomany());
-
-        myEgyenleg.addNevertek(befektetes1+befektetes2);
-
+        System.out.println("");
         EMAP2021_18.getNev();
+        EMAP2021_18.Vasarlas();
         EMAP2021_18.Kamatozas();
         EMAP2021_18.KoltsegSzamitas();
         PMAP2025J.getNev();
+        PMAP2025J.Vasarlas();
         PMAP2025J.Kamatozas();
         PMAP2025J.KoltsegSzamitas();
         MAPPluszN2025_19.getNev();
+        MAPPluszN2025_19.Vasarlas();
         MAPPluszN2025_19.Kamatozas();
         MAPPluszN2025_19.KoltsegSzamitas();
 
+        System.out.println("");
         otpBankBetet.getNev();
         otpBankBetet.Kamatozas();
         otpBankBetet.KoltsegSzamitas();
@@ -112,10 +127,15 @@ public class main {
         otthonitrezorUSD.ArfolyamNyereseg();
         otthonitrezorUSD.KoltsegSzamitas();
 
+        System.out.println("");
+        ethereum2020.getNev();
+        ethereum2020.ArfolyamNyereseg();
+        ethereum2020.KoltsegSzamitas();
+
+        System.out.println("");
         System.out.println("A portfólió összes névértéke= " + myEgyenleg.getOsszesNevErtek());
         System.out.println("A portfólió összes kamata= " + myEgyenleg.getOsszesKamat());
         System.out.println("A portfólió összes költsége= " + myEgyenleg.getOsszesKoltseg());
         System.out.println("A portfólió egyenlege= " + myEgyenleg.getMerleg());
-
     }
 }

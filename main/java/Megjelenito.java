@@ -1,3 +1,6 @@
+import Intezmenyek.Allamkincstar;
+import Intezmenyek.Jegybank;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

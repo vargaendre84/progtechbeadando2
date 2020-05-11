@@ -1,46 +1,16 @@
 package AllampapirStrategia;
-import KoltsegDecorator.*;
-import Portfolio.Egyenleg;
 
 public class KoltsegStrategia_Allampapir extends KoltsegStrategia
 {
-    private long nevErtek;
-    private int lejaratiIdo;
-    private int futamIdo;
-    private boolean befektetesiAlap;
-    private boolean ertekpapirSzamla;
+    protected long nevErtek;
+    protected int lejaratiIdo;
+    protected int futamIdo;
 
-    Egyenleg myEgyenleg = Egyenleg.getInstance();
-
-    public KoltsegStrategia_Allampapir(long nevErtek, int lejaratiIdo, int futamIdo, boolean befektetesiAlap, boolean ertekpapirSzamla)
+    public KoltsegStrategia_Allampapir(long nevErtek, int lejaratiIdo, int futamIdo)
     {
         this.nevErtek = nevErtek;
         this.lejaratiIdo = lejaratiIdo;
         this.futamIdo = futamIdo;
-        this.befektetesiAlap = befektetesiAlap;
-        this.ertekpapirSzamla = ertekpapirSzamla;
     }
-
-    public void KoltsegSzamitas()
-    {
-        IKoltseg koltseg = new Koltseg_Alap();
-        if((lejaratiIdo > futamIdo) && befektetesiAlap && ertekpapirSzamla)
-            koltseg = new Koltseg_VisszaValtas(new Koltseg_Jutalek(new Koltseg_ErtekPapirSzamla(new Koltseg_Alap())));
-        if((lejaratiIdo > futamIdo) && !befektetesiAlap && ertekpapirSzamla)
-            koltseg = new Koltseg_VisszaValtas(new Koltseg_ErtekPapirSzamla(new Koltseg_Alap()));
-        if((lejaratiIdo > futamIdo) && befektetesiAlap && !ertekpapirSzamla)
-            koltseg = new Koltseg_VisszaValtas(new Koltseg_Jutalek(new Koltseg_Alap()));
-        if((lejaratiIdo > futamIdo) && !befektetesiAlap && !ertekpapirSzamla)
-            koltseg = new Koltseg_VisszaValtas(new Koltseg_Alap());
-        if(!(lejaratiIdo > futamIdo) && befektetesiAlap && ertekpapirSzamla)
-            koltseg = new Koltseg_Jutalek(new Koltseg_ErtekPapirSzamla(new Koltseg_Alap()));
-        if(!(lejaratiIdo > futamIdo) && !(befektetesiAlap) && ertekpapirSzamla)
-            koltseg = new Koltseg_ErtekPapirSzamla(new Koltseg_Alap());
-        if(!(lejaratiIdo > futamIdo) && !(befektetesiAlap) && !(ertekpapirSzamla))
-            koltseg = new Koltseg_Alap();
-        System.out.println(koltseg.getKoltsegNem());
-        double aktualisKoltseg = koltseg.getKoltseg(nevErtek);
-        System.out.println("Költség: " + aktualisKoltseg);
-        myEgyenleg.addKoltseg(aktualisKoltseg);
-    }
+    public void KoltsegSzamitas(){}
 }

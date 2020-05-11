@@ -12,7 +12,7 @@ public class Koltseg_Szef extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(long nevErtek) {
-        return alapKoltseg.getKoltseg(nevErtek) + szefBeszerzesiKoltseg + szefBeszerelesiKoltseg;
+    public double getKoltseg(long nevErtek, int futamIdo) {
+        return alapKoltseg.getKoltseg(nevErtek, futamIdo) + szefBeszerzesiKoltseg + szefBeszerelesiKoltseg;
     }
 }

@@ -9,8 +9,8 @@ public class MapPluszKamatesKoltsegTest {
     int befektetes = 1000000;
     int futamIdo = 3;
 
-    AllamPapir MAPPluszN2025_19 = new Allampapir_MAPPlusz(new Kamatozas_Savos_Periodusos_Egyenletes(befektetes, 5, futamIdo, 0.035, 1, 0.005),
-            new KoltsegStrategia_Allampapir(befektetes, 5, futamIdo, false, false),
+    AllamPapir MAPPluszN2025_19 = new Allampapir_MAPPlusz(new Vasarlas_MAPPlusz(befektetes), new Kamatozas_Savos_Periodusos_Egyenletes(befektetes, 5, futamIdo, 0.035, 1, 0.005),
+            new KoltsegStrategia_Allampapir_Jutalek(befektetes, 5, futamIdo),
             "MAP Plusz N2025/19");
     double expected2 = 1000000*0.035 + 1000000*0.04 + 1000000*0.045;
 
@@ -21,7 +21,7 @@ public class MapPluszKamatesKoltsegTest {
         assertEquals(expected2, myEgyenleg.getOsszesKamat(), 0.0);
     }
 
-    double expected4 = 1000000 * 0.02;
+    double expected4 = 1000000 * 0.01 * 3 + 1000000*0.02;
 
     @Test
     public void PMAPKoltsegTest() throws Exception {

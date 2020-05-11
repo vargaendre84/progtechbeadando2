@@ -2,12 +2,14 @@ package AllampapirStrategia;
 
 public class Allampapir_EMAP extends AllamPapir
 {
+    VasarlasiStrategia vasarlas;
     KamatozasiStrategia kamat;
     KoltsegStrategia koltseg;
     private String nev;
 
-    public Allampapir_EMAP(KamatozasiStrategia kamat, KoltsegStrategia koltseg, String nev)
+    public Allampapir_EMAP(VasarlasiStrategia vasarlas, KamatozasiStrategia kamat, KoltsegStrategia koltseg, String nev)
     {
+        this.vasarlas = vasarlas;
         this.kamat = kamat;
         this.koltseg = koltseg;
         this.nev = nev;
@@ -18,23 +20,13 @@ public class Allampapir_EMAP extends AllamPapir
     {
         System.out.println("Állampapír neve: " + nev);
     }
-
     @Override
-    public void setNev(String ujnev) { this.nev = ujnev; }
-
+    public void Vasarlas() {vasarlas.Vasarlas();}
     @Override
     public void Kamatozas() {
         kamat.Kamatozas();
     }
-
     @Override
     public void KoltsegSzamitas(){koltseg.KoltsegSzamitas();}
 
-    @Override
-    public Object Clone()
-    {
-        Allampapir_EMAP uj = new Allampapir_EMAP(kamat,koltseg,nev);
-        uj.nev = nev;
-        return uj;
-    }
 }

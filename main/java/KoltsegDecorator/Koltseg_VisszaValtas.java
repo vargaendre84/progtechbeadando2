@@ -11,8 +11,8 @@ public class Koltseg_VisszaValtas extends KoltsegDecorator
     }
 
     @Override
-    public double getKoltseg(long nevErtek)
+    public double getKoltseg(long nevErtek, int futamIdo)
     {
-        return alapKoltseg.getKoltseg(nevErtek) + nevErtek*visszaValtasiKoltseg;
+        return alapKoltseg.getKoltseg(nevErtek, futamIdo) + nevErtek*visszaValtasiKoltseg;
     }
 }

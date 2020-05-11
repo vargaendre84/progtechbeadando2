@@ -36,5 +36,4 @@ public class Kamatozas_InflacioAlapu extends KamatozasiStrategia
         System.out.println("Kamatozás: " + aktualisKamat) ;
         myEgyenleg.addKamat(aktualisKamat);
     }
-
 }

@@ -29,7 +29,7 @@ Kamatozási Stratégia
 
 - valuták: 
 Költség Stratégia
-Árfolyamnyereségi Stratégia
+ÁrfolyamStratégia
 
 
 
@@ -50,7 +50,7 @@ greedy singleton: egyenleg
 (greedy singleton: értékbevitel gui-ról, értékmegjelenítés GUI-ra)
 
 
-prototype: a megadott állampapír típus sokszorosítása megadott értékben  
+prototype: kriptovaluták bányászata, új mennyiség létrehozása ethereumból
 
 
 observer: árfolyamok frissítése: 
@@ -92,6 +92,7 @@ Unit tests:
 A különbözõ állampapírok hozamainak és költségeinek ellenõrzése manuális számításos unit teszttel
 EMAPKamatozasEsKoltsegTest
 PMAPKamatozasEsKoltsegTest
+MapPluszKamatozasEsKoltsegTest
 
 2) 
 EUR és USD valuták árfolyamérték és árfolyamnyereség teszt
@@ -117,3 +118,5 @@ Bankszámla kamatozás és költségteszt
 BankszamlaKamatozasEsKoltseg
 
 
+7)
+A prototípus gyár mûködése, és a létrehozott, és megvásárolt névértékek tesztelése

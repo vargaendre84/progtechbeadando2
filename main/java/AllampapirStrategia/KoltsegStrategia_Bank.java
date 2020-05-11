@@ -22,7 +22,7 @@ public class KoltsegStrategia_Bank extends KoltsegStrategia
     {
         IKoltseg koltseg = new Koltseg_BankSzamla(new Koltseg_Alap());
         System.out.println(koltseg.getKoltsegNem());
-        double aktualisKoltseg = koltseg.getKoltseg(nevErtek) * futamIdo;
+        double aktualisKoltseg = koltseg.getKoltseg(nevErtek, futamIdo);
         System.out.println("Költség: " + aktualisKoltseg);
     }
 }

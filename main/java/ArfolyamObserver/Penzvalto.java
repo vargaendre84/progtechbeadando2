@@ -7,6 +7,7 @@ public class Penzvalto implements ISubject
     private ArrayList<IObserver> observers;
     private double EurArfolyam;
     private double USDArfolyam;
+    private double kriptoETHArfolyam;
 
     public Penzvalto()
     {
@@ -29,15 +30,16 @@ public class Penzvalto implements ISubject
         for(int i = 0; i < observers.size(); i++)
         {
             IObserver observer = (IObserver)observers.get(i);
-            observer.Update(EurArfolyam,USDArfolyam);
+            observer.Update(EurArfolyam,USDArfolyam,kriptoETHArfolyam);
         }
     }
 
     public void MegvaltozottAzArfolyam(){NotifyObservers();}
-    public void ArfolyamBeallitas(double EurArfolyam, double USDArfolyam)
+    public void ArfolyamBeallitas(double EurArfolyam, double USDArfolyam, double kriptoETHArfolyam)
     {
         this.EurArfolyam = EurArfolyam;
         this.USDArfolyam = USDArfolyam;
+        this.kriptoETHArfolyam = kriptoETHArfolyam;
         MegvaltozottAzArfolyam();
     }
 }

@@ -1,10 +1,10 @@
 package AllampapirStrategia;
+import Intezmenyek.Allamkincstar;
 import Portfolio.Egyenleg;
 
 public class Kamatozas_Normal extends KamatozasiStrategia
 {
     private long nevErtek;
-    private int lejaratiIdo;
     private int futamIdo;
     private double kamat;
     private boolean tbsz;
@@ -12,20 +12,12 @@ public class Kamatozas_Normal extends KamatozasiStrategia
     Kamatado kamatado = new Kamatado();
     Egyenleg myEgyenleg = Egyenleg.getInstance();
 
-    public Kamatozas_Normal(long nevErtek, int lejaratiIdo, int futamIdo,  double kamat, boolean tbsz)
+    public Kamatozas_Normal(long nevErtek, int futamIdo,  double kamat, boolean tbsz)
     {
         this.nevErtek = nevErtek;
-        this.lejaratiIdo = lejaratiIdo;
         this.futamIdo = futamIdo;
         this.kamat = kamat;
         this.tbsz = tbsz;
-    }
-    public Kamatozas_Normal()
-    {
-        this.nevErtek = 1000000;
-        this.futamIdo = 3;
-        this.kamat = 0.01;
-        this.tbsz = true;
     }
 
     @Override

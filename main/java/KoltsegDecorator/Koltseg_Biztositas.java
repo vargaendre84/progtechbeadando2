@@ -14,7 +14,7 @@ public class Koltseg_Biztositas extends KoltsegDecorator {
     }
 
     @Override
-    public double getKoltseg(long nevErtek) {
-        return alapKoltseg.getKoltseg(nevErtek) + lakasBiztositasEvesDij + extraKPBiztositasEvesDij;
+    public double getKoltseg(long nevErtek, int futamIdo) {
+        return alapKoltseg.getKoltseg(nevErtek,futamIdo) + (lakasBiztositasEvesDij + extraKPBiztositasEvesDij)*futamIdo;
     }
 }

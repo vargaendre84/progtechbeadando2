@@ -5,6 +5,7 @@ import Portfolio.Egyenleg;
 public class KoltsegStrategia_KP extends KoltsegStrategia
 {
     private long nevErtek;
+    private int futamIdo = 1;
     Egyenleg myEgyenleg = Egyenleg.getInstance();
 
     public KoltsegStrategia_KP(long nevErtek) { this.nevErtek = nevErtek; }
@@ -16,7 +17,7 @@ public class KoltsegStrategia_KP extends KoltsegStrategia
         {
             IKoltseg koltseg = new Koltseg_Biztositas(new Koltseg_Riaszto(new Koltseg_Szef(new Koltseg_Alap())));
             System.out.println(koltseg.getKoltsegNem());
-            double aktualisKoltseg = koltseg.getKoltseg(nevErtek);
+            double aktualisKoltseg = koltseg.getKoltseg(nevErtek,futamIdo);
             myEgyenleg.addKoltseg(aktualisKoltseg);
             myEgyenleg.setOtthoniTrezorKialakitva(true);
             System.out.println("Költség: " + aktualisKoltseg);
