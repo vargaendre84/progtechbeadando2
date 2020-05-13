@@ -1,14 +1,14 @@
 package ValutaStrategia;
 import KoltsegStrategia.KoltsegStrategia;
 
-public class Valuta_EUR extends Valutak
+public class Kripto_Ethereum extends KriptoValuta
 {
     BeszerzesiStrategia beszerzes;
     ArfolyamStrategia arfolyam;
     KoltsegStrategia koltseg;
     private String nev;
 
-    public Valuta_EUR(BeszerzesiStrategia beszerzes, ArfolyamStrategia arfolyam,KoltsegStrategia koltseg, String nev)
+    public Kripto_Ethereum(BeszerzesiStrategia beszerzes, ArfolyamStrategia arfolyam,KoltsegStrategia koltseg, String nev)
     {
         this.beszerzes = beszerzes;
         this.arfolyam = arfolyam;
@@ -21,9 +21,19 @@ public class Valuta_EUR extends Valutak
         System.out.println(nev);
     }
     @Override
+    public void setNev(String nev) { this.nev = nev;}
+    @Override
     public void Beszerzes() { beszerzes.Beszerzes(); }
     @Override
     public void ArfolyamNyereseg(){arfolyam.ArfolyamNyereseg();}
     @Override
     public void KoltsegSzamitas(){koltseg.KoltsegSzamitas();}
+
+    @Override
+    public Object Clone()
+    {
+        Kripto_Ethereum uj = new Kripto_Ethereum(beszerzes,arfolyam,koltseg,nev);
+        uj.nev = nev;
+        return uj;
+    }
 }

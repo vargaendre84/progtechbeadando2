@@ -1,4 +1,5 @@
 import AllampapirStrategia.*;
+import KoltsegStrategia.KoltsegStrategia_Allampapir_Jutalek;
 import Portfolio.Egyenleg;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,24 +16,24 @@ public class MapPluszKamatesKoltsegTest {
     double expected2 = 1000000*0.035 + 1000000*0.04 + 1000000*0.045;
 
     @Test
-    public void PMAPKamatTest() throws Exception {
+    public void MAPPluszKamatTest() throws Exception {
         Assert.assertTrue(true);
         MAPPluszN2025_19.Kamatozas();
-        assertEquals(expected2, myEgyenleg.getOsszesKamat(), 0.0);
+        assertEquals(expected2, myEgyenleg.getUtolsoKamat(), 0.0);
     }
 
     double expected4 = 1000000 * 0.01 * 3 + 1000000*0.02;
 
     @Test
-    public void PMAPKoltsegTest() throws Exception {
+    public void MAPPluszKoltsegTest() throws Exception {
         Assert.assertTrue(true);
         MAPPluszN2025_19.KoltsegSzamitas();
-        assertEquals(expected4, myEgyenleg.getOsszesKoltseg(), 0.0);
+        assertEquals(expected4, myEgyenleg.getUtolsoKoltseg(), 0.0);
     }
 
     @Test
     public void ZgetMerlegTest() throws Exception {
         Assert.assertTrue(true);
-        assertEquals(expected2 - expected4, myEgyenleg.getMerleg(), 0.0);
+        assertEquals(expected2 - expected4, myEgyenleg.getUtolsoTranzakcioMerleg(), 0.0);
     }
 }

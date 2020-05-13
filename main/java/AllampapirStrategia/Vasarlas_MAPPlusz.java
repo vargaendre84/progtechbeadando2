@@ -11,6 +11,7 @@ public class Vasarlas_MAPPlusz extends VasarlasiStrategia
     public Vasarlas_MAPPlusz(long nevErtek) { this.nevErtek = nevErtek; }
 
     private long vasarolhatoAllomany = allamkincstar.getEladoMAPPluszAllomany();
+    @Override
     public void Vasarlas()
     {
         if(nevErtek > vasarolhatoAllomany) nevErtek = vasarolhatoAllomany;

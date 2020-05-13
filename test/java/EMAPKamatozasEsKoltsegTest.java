@@ -1,4 +1,5 @@
 import AllampapirStrategia.*;
+import KoltsegStrategia.KoltsegStrategia_Allampapir_EPSZ;
 import Portfolio.Egyenleg;
 import org.junit.Test;
 import org.junit.Assert;
@@ -20,7 +21,7 @@ public class EMAPKamatozasEsKoltsegTest
     {
         Assert.assertTrue(true);
         EMAP2021_18.Kamatozas();
-        assertEquals(expected1, myEgyenleg.getOsszesKamat(),0.0);
+        assertEquals(expected1, myEgyenleg.getUtolsoKamat(),0.0);
     }
 
     double expected3 = 1000000 * 0.0022 *3 ;
@@ -29,13 +30,13 @@ public class EMAPKamatozasEsKoltsegTest
     {
         Assert.assertTrue(true);
         EMAP2021_18.KoltsegSzamitas();
-        assertEquals(expected3, myEgyenleg.getOsszesKoltseg() ,0.0);
+        assertEquals(expected3, myEgyenleg.getUtolsoKoltseg() ,0.0);
     }
 
     @Test
     public void ZgetMerlegTest() throws Exception
     {
         Assert.assertTrue(true);
-        assertEquals(expected1 - expected3, myEgyenleg.getMerleg(),0.0);
+        assertEquals(expected1 - expected3, myEgyenleg.getUtolsoTranzakcioMerleg(),0.0);
     }
 }

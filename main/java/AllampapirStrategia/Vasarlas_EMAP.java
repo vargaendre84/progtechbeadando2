@@ -10,6 +10,7 @@ public class Vasarlas_EMAP extends VasarlasiStrategia
     public Vasarlas_EMAP(long nevErtek) { this.nevErtek = nevErtek; }
 
     private long vasarolhatoAllomany = allamkincstar.getEladoEMAPAllomany();
+    @Override
     public void Vasarlas()
     {
         if(nevErtek > vasarolhatoAllomany) nevErtek = vasarolhatoAllomany;

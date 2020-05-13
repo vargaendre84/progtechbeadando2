@@ -1,5 +1,7 @@
 package AllampapirStrategia;
 
+import KoltsegStrategia.KoltsegStrategia;
+
 public class Allampapir_EMAP extends AllamPapir
 {
     VasarlasiStrategia vasarlas;

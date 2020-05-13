@@ -1,4 +1,5 @@
 import AllampapirStrategia.*;
+import KoltsegStrategia.KoltsegStrategia_Allampapir_JutalekEPSZ;
 import Portfolio.Egyenleg;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class PMAPKamatozasEsKoltsegTest
 
     AllamPapir PMAP2025J = new Allampapir_PMAP(new Vasarlas_PMAP(befektetes) , new Kamatozas_InflacioAlapu(befektetes,5,futamIdo,0.014,false),
             new KoltsegStrategia_Allampapir_JutalekEPSZ(befektetes,5,futamIdo),
-            "Prémium Magyar Állampapír 2025-J");;
+            "Prémium Magyar Állampapír 2025-J");
     double expected2 =  1000000 * (0.014 + 0.039) * (1 - 0.15) +
             1000000 * (0.014 + 0.055) * (1 - 0.15) +
             1000000 * (0.014 + 0.048) * (1 - 0.15);
@@ -22,7 +23,7 @@ public class PMAPKamatozasEsKoltsegTest
     {
         Assert.assertTrue(true);
         PMAP2025J.Kamatozas();
-        assertEquals(expected2, myEgyenleg.getOsszesKamat(),0.0);
+        assertEquals(expected2, myEgyenleg.getUtolsoKamat(),0.0);
     }
 
     double expected4 = 1000000 * 0.01 * 3 + 1000000*0.0022*3 + 1000000 * 0.02;
@@ -31,13 +32,13 @@ public class PMAPKamatozasEsKoltsegTest
     {
         Assert.assertTrue(true);
         PMAP2025J.KoltsegSzamitas();
-        assertEquals(expected4, myEgyenleg.getOsszesKoltseg(),0.0);
+        assertEquals(expected4, myEgyenleg.getUtolsoKoltseg(),0.0);
     }
 
     @Test
     public void ZgetMerlegTest() throws Exception
     {
         Assert.assertTrue(true);
-        assertEquals(expected2 - expected4, myEgyenleg.getMerleg(),0.0);
+        assertEquals(expected2 - expected4, myEgyenleg.getUtolsoTranzakcioMerleg(),0.0);
     }
 }

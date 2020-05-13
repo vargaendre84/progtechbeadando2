@@ -11,6 +11,7 @@ public class Vasarlas_PMAP extends VasarlasiStrategia
     public Vasarlas_PMAP(long nevErtek) { this.nevErtek = nevErtek; }
 
     private long vasarolhatoAllomany = allamkincstar.getEladoPMAPAllomany();
+    @Override
     public void Vasarlas()
     {
         if(nevErtek > vasarolhatoAllomany) nevErtek = vasarolhatoAllomany;

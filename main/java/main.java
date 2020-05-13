@@ -1,9 +1,10 @@
+import Intezmenyek.EthereumBlokklanc;
 import ArfolyamObserver.*;
 import AllampapirStrategia.*;
 import Intezmenyek.Allamkincstar;
 import Intezmenyek.Jegybank;
+import KoltsegStrategia.*;
 import Portfolio.Egyenleg;
-import Portfolio.Kereskedes;
 import ValutaStrategia.Valuta_EUR;
 import ValutaStrategia.Valuta_HUF;
 import ValutaStrategia.*;
@@ -18,7 +19,7 @@ public class main {
         Jegybank jegybank = Jegybank.getInstance();
         Allamkincstar allamkincstar = Allamkincstar.getInstance();
         Egyenleg myEgyenleg = Egyenleg.getInstance();
-        Kereskedes kereskedes = Kereskedes.getInstance();
+        EthereumBlokklanc blokklanc = EthereumBlokklanc.getInstance();
 
         long befektetes1 = 10000000;
         long befektetes2 = 30000000;
@@ -81,24 +82,6 @@ public class main {
         AllamPapir MAPPluszN2025_19 = new Allampapir_MAPPlusz(new Vasarlas_MAPPlusz(befektetes2), new Kamatozas_Savos_Periodusos_Egyenletes(befektetes2,lejaratiIdo5,futamIdo,alapkamat35,lejaratiIdo1,kamatvaltozas),
                 new KoltsegStrategia_Allampapir_Jutalek(befektetes2,lejaratiIdo5,futamIdo),
                 "MAP Plusz N2025/19");
-
-        BankBetet otpBankBetet = new BankBetet(new Kamatozas_Normal(befektetes1,futamIdo,bankikamat,false),
-                new KoltsegStrategia_Bank(befektetes1,futamIdo),
-                "OTP BankBetét 2020 Április");
-        Valutak otthonitrezor = new Valuta_HUF(new KoltsegStrategia_KP(befektetes1), "Otthoni trezor");
-        Valutak otthonitrezorEur = new Valuta_EUR(new ArfolyamStrategia_EUR(befektetes2/(long)veteliEURArfolyam,veteliEURArfolyam,aktualisEURArfolyam),
-                new KoltsegStrategia_KP(befektetes2),
-                "Euró beszerzés 2020.02.20.");
-        Valutak otthonitrezorUSD = new Valuta_USD(new ArfolyamStrategia_USD(befektetes2/(long)veteliUSDArfolyam,veteliUSDArfolyam,aktualisUSDArfolyam),
-                new KoltsegStrategia_KP(befektetes2),
-                "USD beszerzés 2020.04.21.");
-
-        KriptoValuta ethereum2020 = new Kripto_Ethereum(new ArfolyamStrategia_Kripto_Ethereum(befektetes1/(long)veteliETHArfolyam,veteliETHArfolyam,aktualisETHArfolyam),
-                new KoltsegStrategia_Allampapir_EPSZ(befektetes1,lejaratiIdo1,futamIdo),"Ethereum befektetés 2020");
-        Banyaszat banyagep1 = new Banyaszat();
-        KriptoValuta[] ethSorozat = banyagep1.kibocsatas(ethereum2020,"Ethereum kriptovaluta",banyaszandoKriptoValuta);
-        System.out.println(ethSorozat.length + " egységnyi Ether létrehozva");
-
         System.out.println("");
         EMAP2021_18.getNev();
         EMAP2021_18.Vasarlas();
@@ -113,11 +96,25 @@ public class main {
         MAPPluszN2025_19.Kamatozas();
         MAPPluszN2025_19.KoltsegSzamitas();
 
+        BankBetet otpBankBetet = new BankBetet(new Beszerzes_Utalas(befektetes1),
+                new Kamatozas_Normal(befektetes1,futamIdo,bankikamat,false),
+                new KoltsegStrategia_Bank(befektetes1,futamIdo),
+                "OTP BankBetét 2020 Április");
         System.out.println("");
         otpBankBetet.getNev();
         otpBankBetet.Kamatozas();
         otpBankBetet.KoltsegSzamitas();
 
+        Valutak otthonitrezor = new Valuta_HUF(new Beszerzes_KP(befektetes1),new KoltsegStrategia_KP(befektetes1), "Otthoni trezor");
+        Valutak otthonitrezorEur = new Valuta_EUR(new Beszerzes_KP(befektetes2/(long)veteliEURArfolyam),
+                new ArfolyamStrategia_EUR(befektetes2/(long)veteliEURArfolyam,veteliEURArfolyam,aktualisEURArfolyam),
+                new KoltsegStrategia_KP(befektetes2),
+                "Euró beszerzés 2020.02.20.");
+        Valutak otthonitrezorUSD = new Valuta_USD(new Beszerzes_KP(befektetes2/(long)veteliUSDArfolyam),
+                new ArfolyamStrategia_USD(befektetes2/(long)veteliUSDArfolyam,veteliUSDArfolyam,aktualisUSDArfolyam),
+                new KoltsegStrategia_KP(befektetes2),
+                "USD beszerzés 2020.04.21.");
+        System.out.println("");
         otthonitrezor.getNev();
         otthonitrezor.KoltsegSzamitas();
         otthonitrezorEur.getNev();
@@ -127,10 +124,20 @@ public class main {
         otthonitrezorUSD.ArfolyamNyereseg();
         otthonitrezorUSD.KoltsegSzamitas();
 
+        KriptoValuta ethereum2020 = new Kripto_Ethereum(new Beszerzes_Utalas(befektetes1/(long)veteliETHArfolyam),
+                new ArfolyamStrategia_Kripto_Ethereum(befektetes1/(long)veteliETHArfolyam,veteliETHArfolyam,aktualisETHArfolyam),
+                new KoltsegStrategia_Allampapir_EPSZ(befektetes1,lejaratiIdo1,futamIdo),"Ethereum befektetés 2020");
         System.out.println("");
         ethereum2020.getNev();
+        ethereum2020.Beszerzes();
         ethereum2020.ArfolyamNyereseg();
         ethereum2020.KoltsegSzamitas();
+
+        Banyaszat banyagep1 = new Banyaszat();
+        KriptoValuta[] ethSorozat = banyagep1.kibocsatas(ethereum2020,"Ethereum kriptovaluta",banyaszandoKriptoValuta);
+        blokklanc.ujBanyaszottMennyisegHozzaadasa(ethSorozat.length);
+        myEgyenleg.addNevertek(ethSorozat.length);
+        System.out.println(ethSorozat.length + " egységnyi Ether létrehozva és hozzáadva a Blokklánchoz");
 
         System.out.println("");
         System.out.println("A portfólió összes névértéke= " + myEgyenleg.getOsszesNevErtek());
