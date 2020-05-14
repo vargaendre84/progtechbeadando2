@@ -117,6 +117,3 @@ ArfolyamTest
 Bankszámla kamatozás és költségteszt
 BankszamlaKamatozasEsKoltseg
 
-
-7)
-A prototípus gyár mûködése, és a létrehozott, és megvásárolt névértékek tesztelése

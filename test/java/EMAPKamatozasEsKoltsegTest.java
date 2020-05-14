@@ -1,5 +1,7 @@
-import AllampapirStrategia.*;
+import KamatozasiVasarlasiStrategia.*;
 import KoltsegStrategia.KoltsegStrategia_Allampapir_EPSZ;
+import PenzugyiEszkozok.AllamPapir;
+import PenzugyiEszkozok.Allampapir_EMAP;
 import Portfolio.Egyenleg;
 import org.junit.Test;
 import org.junit.Assert;
@@ -11,9 +13,9 @@ public class EMAPKamatozasEsKoltsegTest
     int befektetes = 1000000;
     int futamIdo = 3;
 
-    AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Vasarlas_EMAP(befektetes), new Kamatozas_Normal(befektetes,futamIdo,0.025,false),
+    AllamPapir EMAP2021_18 = new Allampapir_EMAP(new Vasarlas_EMAP(befektetes), new Kamatozas_Normal(befektetes,futamIdo,1,0.025,false),
             new KoltsegStrategia_Allampapir_EPSZ(befektetes,1,futamIdo),
-            "Egy éves magyar Állampapír 2021-18");
+            "Egy éves magyar Állampapír 2021-18", "EMAP");
     double expected1 = 1000000 * 0.025 * (1-0.15) * 3;
 
     @Test

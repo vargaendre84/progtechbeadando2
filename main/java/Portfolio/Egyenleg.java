@@ -47,7 +47,11 @@ public class Egyenleg    //greedy singleton
     public double getOsszesKoltseg() { return osszesKoltseg; }
     public void addKoltseg(double novekmeny)
     {
+        utolsoHozzaadottKoltseg = novekmeny;
         osszesKoltseg += novekmeny;
+    }
+    public void setUtolsoKoltseg(double novekmeny)
+    {
         utolsoHozzaadottKoltseg = novekmeny;
     }
     public double getUtolsoArfolyamNyereseg() { return utolsoHozzaadottArfolyamNyereseg; }
@@ -60,6 +64,7 @@ public class Egyenleg    //greedy singleton
 
     public double getUtolsoTranzakcioMerleg() {return (utolsoHozzaadottKamat + utolsoHozzaadottArfolyamNyereseg - utolsoHozzaadottKoltseg);}
     public double getMerleg() {return (osszesKamat + osszesArfolyamNyereseg - osszesKoltseg);}
+
     public boolean getOtthoniTrezorKialakitva() {return otthoniTrezorKialakitva;}
     public void setOtthoniTrezorKialakitva(boolean ertek) { otthoniTrezorKialakitva = ertek;}
 }

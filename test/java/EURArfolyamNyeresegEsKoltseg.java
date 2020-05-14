@@ -1,4 +1,6 @@
 import KoltsegStrategia.KoltsegStrategia_KP;
+import PenzugyiEszkozok.Valuta;
+import PenzugyiEszkozok.Valuta_EUR;
 import Portfolio.Egyenleg;
 import ValutaStrategia.*;
 import org.junit.Assert;
@@ -11,11 +13,11 @@ public class EURArfolyamNyeresegEsKoltseg
     double aktualisEURArfolyam = 360.0;
     final Egyenleg myEgyenleg = Egyenleg.getInstance();
 
-    Valutak otthonitrezorEur = new Valuta_EUR(new Beszerzes_KP(befektetes1/330),
-            new ArfolyamStrategia_EUR(befektetes1/330,330.0,aktualisEURArfolyam),
+    Valuta otthonitrezorEur = new Valuta_EUR(new Beszerzes_KP(befektetes1),
+            new ArfolyamStrategia_EUR(befektetes1,330.0,aktualisEURArfolyam),
             new KoltsegStrategia_KP(befektetes1),
-            "Euró beszerzés 2020.02.20.");
-    double expected1 = (10000000/330) * (360-330);
+            "Euró beszerzés 2020.02.20.", "EUR");
+    double expected1 = (10000000/330.0) * (360.0-330.0);
 
     @Test
     public void EurArfolyamNyeresegTest() throws Exception

@@ -1,4 +1,4 @@
-import AllampapirStrategia.Inflacio;
+import KamatozasiVasarlasiStrategia.Inflacio;
 import org.junit.Test;
 import org.junit.Assert;
 import static org.junit.Assert.*;

@@ -1,5 +1,7 @@
-import AllampapirStrategia.*;
+import KamatozasiVasarlasiStrategia.*;
 import KoltsegStrategia.KoltsegStrategia_Allampapir_JutalekEPSZ;
+import PenzugyiEszkozok.AllamPapir;
+import PenzugyiEszkozok.Allampapir_PMAP;
 import Portfolio.Egyenleg;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +15,7 @@ public class PMAPKamatozasEsKoltsegTest
 
     AllamPapir PMAP2025J = new Allampapir_PMAP(new Vasarlas_PMAP(befektetes) , new Kamatozas_InflacioAlapu(befektetes,5,futamIdo,0.014,false),
             new KoltsegStrategia_Allampapir_JutalekEPSZ(befektetes,5,futamIdo),
-            "Prémium Magyar Állampapír 2025-J");
+            "Prémium Magyar Állampapír 2025-J", "PMAP");
     double expected2 =  1000000 * (0.014 + 0.039) * (1 - 0.15) +
             1000000 * (0.014 + 0.055) * (1 - 0.15) +
             1000000 * (0.014 + 0.048) * (1 - 0.15);
