@@ -1,42 +1,62 @@
-# progtechbeadando2
-Progtech beadandó
-
+# beadandó feladat Programozási etchnológiák gy tárgyból
 Állampapírok, és egyéb pénzügyi eszközök nyilvántartása
 hozamok számolása
 
 
 Megvalósítás:
-Java alkalmazás, parancssorral (esetleg egyszerű Swing felhasználói felülettel)
+Java alkalmazás, parancssorral 
 
 
 Működés:
-Az alkalmazás állampapírokat tart nyilván, azok adataival, kamataival, futamidejével, visszaváltási költségével, vételi és eladási árfolyamaival. Az alkalmazás fő fókusza a Prémium Állampapír, a Magyar Állampapír Plusz, Kincstárjegy. 
+Az alkalmazás állampapírokat tart nyilván, azok adataival, kamataival, futamidejével, visszaváltási költségével, vételi és eladási árfolyamaival. 
+Az alkalmazás fő fókusza a Prémium Állampapír, a Magyar Állampapír Plusz, Kincstárjegy. 
 A programba beírható lesz milyen összeget kívánunk állampapírba fektetni, és ez milyen hozamot tud elérni és milyen költségeket kell kifizetni. Ezt összehasonlítja, a készpénzben tartás, a bankbetét, illetve külföldi valutában tartás hozamait, és költségeit. 
 Az alkalmazás figyelembe veszi az árfolyamváltozásokat, és az infláció okozta értékcsökkentést.
 A program a megadott beállításoknak megfelelően megjeleníti a legjobb hozamot előrejelző befektetési formát.
 Megéri-e megvenni, vagy eladni az adott állampapírt, összehasonlítva más pénzügyi eszközökkel.
 
 
+
 Tervezési minták:
 
-Stratégia:: Állampapírok csoportja: 
-Az állampapírok különbözőképp kamatoznak, különböző az eladási, vételi árfolyamuk, 
+Stratégia: 
+- Állampapírok csoportja: 
+Az állampapírok különbözőképp kamatoznak, különböző az eladási, vételi árfolyamuk, és költségük
+Kamatozási Stratégia
+Költség Stratégia
+
+- Bankszámlák 
+Kamatozási Stratégia
+
+- valuták: 
+Költség Stratégia
+ÁrfolyamStratégia
 
 
-Decorator: pénzügyi eszközök portfóliójánk a hozama, költsége : 
-Több pénzügyi eszköz kiválsaztása esetén a hozamok és költségek kiszámítása
+
+Decorator: 
+- állampapírok költsége: visszaváltás, jutalék, számlavezetés, stb
+- valuták tárolási és biztosítási költsége
 
 
-lazy singleton: mnb:  greedy singleton: államkincstár: 
+lazy singleton: mnb:  
+greedy singleton: államkincstár: 
 Jegybank és Államkincstár is egy van a magyar pénzrendszerben. A jegybank általában késve avatkozik be az árfolyam romlása esetén. A jegybank viszont hamar tud változtatni az új állampapír sorozatok kiadásával.
 
 
-prototype(vagy factory): új állampapír létrehozása:  
-Új állampapír létrehozásánál kamatozási módok, költségek, és működési módokból új állampapír példány legyártása.
+greedy singleton: egyenleg
+összegzi az összes megvett állampapír névértékét és realizált kamatát, és költségét
 
 
-observer: árfolyamok, infláció frissítése: 
-A valuta árfolyamok és infláció értéke folyamatosan frissül a állampapír futamideje alatt. Ezeket kérik le az egyes hozam és költség számoló metódusok.
+(greedy singleton: értékbevitel gui-ról, értékmegjelenítés GUI-ra)
+
+
+prototype: kriptovaluták bányászata, új mennyiség létrehozása ethereumból
+
+
+observer: árfolyamok frissítése: 
+A valuta árfolyamokértéke rendszeresen frissül. Ezeket kérik le az EUR és USD árfolyam osztályok
+
 
 
 
@@ -71,10 +91,34 @@ A Allampapir helyére a leszármazott PMAP osztályt is behelyettesíthetjük. A
 Unit tests:
 1) 
 A különböző állampapírok hozamainak és költségeinek ellenőrzése manuális számításos unit teszttel
+EMAPKamatozasEsKoltsegTest
+PMAPKamatozasEsKoltsegTest
+MapPluszKamatozasEsKoltsegTest
 
 2) 
-Vételi és eladási árfolyamok tesztelése manuális számításos unit teszttel
+EUR és USD valuták árfolyamérték és árfolyamnyereség teszt
+USDArfolyamNyeresegtest
+EURArfolyamNyeresegtest
+ETHArfolyamNyeresegtest
+
 
 3)
-inflációs értékcsökkenések ellenőrzése manuális számításos unit teszttel
+inflációs értékek tesztelése + infláció osztály tdd fejlesztése
+InflacioTest
 
+
+4) 
+kamatadó metódus tesztelése + kamatadó osztály tdd fejlesztése:
+KamatAdotest
+
+5) 
+Árfolyam Observer működésének tesztelése
+ArfolyamTest
+
+6) 
+Bankszámla kamatozás és költségteszt
+BankszamlaKamatozasEsKoltseg
+
+7) 
+Kriptopénz bányászati menyniség, költség és árfolyam teszt
+BanyaszatMennyisegKoltseg
