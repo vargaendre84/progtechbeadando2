@@ -1,4 +1,4 @@
-# beadandó feladat Programozási etchnológiák gy tárgyból
+# Beadandó feladat Programozási technológiák gy tárgyból
 Állampapírok, és egyéb pénzügyi eszközök nyilvántartása
 hozamok számolása
 
