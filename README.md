@@ -54,8 +54,6 @@ greedy singleton: egyenleg
 összegzi az összes megvett állampapír névértékét és realizált kamatát, és költségét
 
 
-(greedy singleton: értékbevitel gui-ról, értékmegjelenítés GUI-ra)
-
 
 prototype: kriptovaluták bányászata, új mennyiség létrehozása ethereumból
 
