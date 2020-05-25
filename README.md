@@ -2,6 +2,12 @@
 Állampapírok, és egyéb pénzügyi eszközök nyilvántartása
 hozamok számolása
 
+! 
+Az AllampapirStrategia package egy régebbi struktúra része. 
+A program jobb átláthatósága érdekében az AllampapirStrategia
+package fajljai szét lettek szortírozva a KamatozasiVasarlasi es Koltsegstategia
+valamint PenzugyiEszkozok package-ekbe.
+!
 
 Megvalósítás:
 Java alkalmazás, parancssorral 
