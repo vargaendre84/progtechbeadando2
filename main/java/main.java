@@ -1,3 +1,5 @@
+import Exceptions.ArfolyamException;
+import Exceptions.ErtekException;
 import KoltsegDecorator.IKoltseg;
 import KoltsegDecorator.Koltseg_Alap;
 import KoltsegDecorator.Koltseg_Aram;
@@ -18,15 +20,17 @@ import java.io.InputStreamReader;
 
 public class main {
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws Exception
     {
         Jegybank jegybank = Jegybank.getInstance();
         Allamkincstar allamkincstar = Allamkincstar.getInstance();
         Egyenleg myEgyenleg = Egyenleg.getInstance();
         EthereumBlokklanc blokklanc = EthereumBlokklanc.getInstance();
 
-        long befektetes1 = 100000;
-        int futamIdo = 3;
+        long alapBefektetes = 1000000;
+        int alapfutamido = 3;
+        long befektetes1 = alapBefektetes;
+        int futamIdo = alapfutamido;
         int lejaratiIdo1 = 1;
         int lejaratiIdo5 = 5;
         double alapkamat25 = 0.025;
@@ -57,31 +61,73 @@ public class main {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Adja meg milyen összeget akar befektetni: (magyar Forint)");
-        befektetes1 = Integer.parseInt(reader.readLine());
-        System.out.println("Hány évre szeretné lekötni? (maximum 5év lehetséges) ");
-        futamIdo = Integer.parseInt(reader.readLine());
-        if (futamIdo < 1) futamIdo = 1;
-        else if (futamIdo > 5) futamIdo = 5;
+        try
+        {
+            System.out.println("Adja meg milyen összeget akar befektetni: (magyar Forint)");
+            befektetes1 = Integer.parseInt(reader.readLine());
+            if(befektetes1 < 0) throw new ErtekException("Rossz értéket adott meg",befektetes1);
+            System.out.println("Hány évre szeretné lekötni? (maximum 5év lehetséges) ");
+            futamIdo = Integer.parseInt(reader.readLine());
+            if(futamIdo < 0) throw new ErtekException("Rossz értéket adott meg",futamIdo);
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("Nem számot adott meg!");
+            befektetes1 = alapBefektetes;
+            futamIdo = alapfutamido;
+        }
+        catch (ErtekException e)
+        {
+            System.out.println(e.getMessage());
+            befektetes1 = alapBefektetes;
+            futamIdo = alapfutamido;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Rossz értéket adott meg. A program futása foyltatódik alap értékekkel");
+            befektetes1 = alapBefektetes;
+            futamIdo = alapfutamido;
+        }
 
         System.out.println("");
         Penzvalto penzvalto = new Penzvalto();
-        Arfolyam_Euro euroValuta = new Arfolyam_Euro(penzvalto);
-        Arfolyam_USD dollarValuta = new Arfolyam_USD(penzvalto);
-        Arfolyam_Kripto_Ethereum ethValuta = new Arfolyam_Kripto_Ethereum(penzvalto);
+        Arfolyam_Euro euroValutaArfolyam = new Arfolyam_Euro(penzvalto);
+        Arfolyam_USD dollarValutaArfolyam = new Arfolyam_USD(penzvalto);
+        Arfolyam_Kripto_Ethereum ethValutaArfolyam = new Arfolyam_Kripto_Ethereum(penzvalto);
 
-        System.out.print("Adja meg az aktuális EUR vételi árfolyamot: ");
-        aktualisEURArfolyam = Double.parseDouble(reader.readLine());
-        System.out.print("Adja meg az aktuális USD vételi árfolyamot: ");
-        aktualisUSDArfolyam = Double.parseDouble(reader.readLine());
-        System.out.print("Adja meg az aktuális Ethereum vételi árfolyamot: ");
-        aktualisETHArfolyam = Double.parseDouble(reader.readLine());
-        penzvalto.ArfolyamBeallitas(aktualisEURArfolyam,aktualisUSDArfolyam,aktualisETHArfolyam);
+        try
+        {
+            System.out.print("Adja meg az aktuális EUR vételi árfolyamot: ");
+            aktualisEURArfolyam = Double.parseDouble(reader.readLine());
+            System.out.print("Adja meg az aktuális USD vételi árfolyamot: ");
+            aktualisUSDArfolyam = Double.parseDouble(reader.readLine());
+            System.out.print("Adja meg az aktuális Ethereum vételi árfolyamot: ");
+            aktualisETHArfolyam = Double.parseDouble(reader.readLine());
+        }
+        catch (NumberFormatException e)
+        {
+            System.out.println("Nem számot adott meg!");
+            aktualisEURArfolyam = veteliEURArfolyam;
+            aktualisUSDArfolyam = veteliUSDArfolyam;
+            aktualisETHArfolyam = veteliETHArfolyam;
+        }
 
-        System.out.println("Aktuális EUR, USD és ETH árfolyam frissítve: ");
-        euroValuta.Display();
-        dollarValuta.Display();
-        ethValuta.Display();
+        try
+        {
+            penzvalto.ArfolyamBeallitas(aktualisEURArfolyam, aktualisUSDArfolyam, aktualisETHArfolyam);
+            System.out.println("Aktuális EUR, USD és ETH árfolyam frissítve: ");
+        }
+        catch (ArfolyamException e)
+        {
+            System.out.println(e.getMessage());
+            penzvalto.ArfolyamBeallitas(veteliEURArfolyam, veteliUSDArfolyam, veteliETHArfolyam);
+            System.out.println("Aktuális EUR, USD és ETH árfolyam frissítve az alap értékekkel: ");
+        }
+
+        euroValutaArfolyam.Display();
+        dollarValutaArfolyam.Display();
+        ethValutaArfolyam.Display();
+
 
         allamkincstar.AllamPapirKibocsatas_PMAP(cimletErtek * cimletekMaxSzama);
         allamkincstar.AllamPapirKibocsatas_EMAP(cimletErtek * cimletekMaxSzama);
@@ -132,6 +178,7 @@ public class main {
         eredmenyek[2].koltseg = myEgyenleg.getUtolsoKoltseg();
         eredmenyek[2].merleg = myEgyenleg.getUtolsoTranzakcioMerleg();
 
+
         BankBetet otpBankBetet = new BankBetet(new Beszerzes_Utalas(befektetes1),
                 new Kamatozas_Normal(befektetes1,futamIdo,lejaratiIdo1,bankikamat,false),
                 new KoltsegStrategia_Bank(befektetes1,futamIdo),
@@ -147,6 +194,7 @@ public class main {
         eredmenyek[3].hozam = myEgyenleg.getUtolsoKamat();
         eredmenyek[3].koltseg = myEgyenleg.getUtolsoKoltseg();
         eredmenyek[3].merleg = myEgyenleg.getUtolsoTranzakcioMerleg();
+
 
         Valuta otthonitrezor = new Valuta_HUF(new Beszerzes_KP(befektetes1),
                 new ArfolyamStrategia_HUF(befektetes1),
@@ -194,6 +242,7 @@ public class main {
         eredmenyek[6].koltseg = myEgyenleg.getUtolsoKoltseg();
         eredmenyek[6].merleg = myEgyenleg.getUtolsoTranzakcioMerleg();
 
+
         KriptoValuta ethereum2020 = new Kripto_Ethereum(new Beszerzes_Utalas(befektetes1),
                 new ArfolyamStrategia_Kripto_Ethereum(befektetes1,veteliETHArfolyam,aktualisETHArfolyam),
                 new KoltsegStrategia_KriptoValuta(befektetes1),"Ethereum 2020","KriptoValuta" );
@@ -209,7 +258,8 @@ public class main {
         eredmenyek[7].koltseg = myEgyenleg.getUtolsoKoltseg();
         eredmenyek[7].merleg = myEgyenleg.getUtolsoTranzakcioMerleg();
 
-        Banyaszat banyagep1 = new Banyaszat();
+
+        Banya banyagep1 = new Banya();
         KriptoValuta[] ethSorozat = banyagep1.kibocsatas(ethereum2020,"Bányászott Ethereum kriptovaluta",futamIdo);
         blokklanc.ujBanyaszottMennyisegHozzaadasa(ethSorozat.length);
         System.out.println(ethSorozat.length + " egységnyi Ethereum létrehozva és hozzáadva a Blokklánchoz");
@@ -226,6 +276,7 @@ public class main {
         eredmenyek[8].hozam = myEgyenleg.getUtolsoArfolyamNyereseg();
         eredmenyek[8].koltseg = myEgyenleg.getUtolsoKoltseg();
         eredmenyek[8].merleg = myEgyenleg.getUtolsoTranzakcioMerleg();
+
 
         System.out.println("");
         System.out.println("A portfólió összes névértéke= " + (long)myEgyenleg.getOsszesNevErtek());

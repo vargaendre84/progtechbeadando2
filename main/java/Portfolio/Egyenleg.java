@@ -1,12 +1,15 @@
 package Portfolio;
 
-public class Egyenleg    //greedy singleton
+import Intezmenyek.Jegybank;
+
+public class Egyenleg
 {
     public String portfolio;
-    private static final Egyenleg instance = new Egyenleg();
+    private static volatile Egyenleg instance = null;
     private Egyenleg() {}
     public static Egyenleg getInstance()
     {
+        if(instance == null) { instance = new Egyenleg(); }
         return instance;
     }
 

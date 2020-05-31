@@ -1,4 +1,5 @@
 package ArfolyamObserver;
+import Exceptions.ArfolyamException;
 
 public class Arfolyam_Kripto_Ethereum implements IObserver,IDisplay
 {
@@ -12,7 +13,12 @@ public class Arfolyam_Kripto_Ethereum implements IObserver,IDisplay
     }
 
     @Override
-    public void Update(double eurArfolyam, double usdArfolyam, double kriptoETHArfolyam) {this.kriptoETHArfolyam = kriptoETHArfolyam; }
+    public void Update(double eurArfolyam, double usdArfolyam, double kriptoETHArfolyam) throws ArfolyamException
+    {
+        if (kriptoETHArfolyam > 0.0)
+             this.kriptoETHArfolyam = kriptoETHArfolyam;
+        else throw new ArfolyamException("Rossz árfolyam értéket adott meg!", kriptoETHArfolyam);
+    }
 
     public double getArfolyam()
     {

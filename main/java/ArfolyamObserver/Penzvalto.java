@@ -1,5 +1,7 @@
 package ArfolyamObserver;
 
+import Exceptions.ArfolyamException;
+
 import java.util.ArrayList;
 
 public class Penzvalto implements ISubject
@@ -26,7 +28,7 @@ public class Penzvalto implements ISubject
     }
 
     @Override
-    public void NotifyObservers() {
+    public void NotifyObservers() throws Exception {
         for(int i = 0; i < observers.size(); i++)
         {
             IObserver observer = (IObserver)observers.get(i);
@@ -34,12 +36,21 @@ public class Penzvalto implements ISubject
         }
     }
 
-    public void MegvaltozottAzArfolyam(){NotifyObservers();}
+    public void MegvaltozottAzArfolyam() throws Exception {NotifyObservers();}
+
     public void ArfolyamBeallitas(double EurArfolyam, double USDArfolyam, double kriptoETHArfolyam)
+            throws Exception
     {
-        this.EurArfolyam = EurArfolyam;
-        this.USDArfolyam = USDArfolyam;
-        this.kriptoETHArfolyam = kriptoETHArfolyam;
+        if (EurArfolyam > 0.0)
+            this.EurArfolyam = EurArfolyam;
+        else throw new ArfolyamException("Rossz árfolyam értéket adott meg!", EurArfolyam);
+        if (USDArfolyam > 0.0)
+            this.USDArfolyam = USDArfolyam;
+        else throw new ArfolyamException("Rossz árfolyam értéket adott meg!",USDArfolyam);
+        if (kriptoETHArfolyam > 0.0)
+            this.kriptoETHArfolyam = kriptoETHArfolyam;
+        else throw new ArfolyamException("Rossz árfolyam értéket adott meg!", kriptoETHArfolyam);
+
         MegvaltozottAzArfolyam();
     }
 }

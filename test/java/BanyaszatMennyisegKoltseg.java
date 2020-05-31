@@ -7,7 +7,7 @@ import PenzugyiEszkozok.KriptoValuta;
 import PenzugyiEszkozok.Kripto_Ethereum;
 import Portfolio.Egyenleg;
 import ValutaStrategia.ArfolyamStrategia_Kripto_Ethereum;
-import ValutaStrategia.Banyaszat;
+import ValutaStrategia.Banya;
 import ValutaStrategia.Beszerzes_Utalas;
 import ValutaStrategia.EthereumBlokklanc;
 import org.junit.Assert;
@@ -26,11 +26,11 @@ public class BanyaszatMennyisegKoltseg
     KriptoValuta ethereum2020 = new Kripto_Ethereum(new Beszerzes_Utalas(befektetes1),
             new ArfolyamStrategia_Kripto_Ethereum(befektetes1,veteliETHArfolyam,aktualisETHArfolyam),
             new KoltsegStrategia_KriptoValuta(befektetes1),"Ethereum 2020","KriptoValuta" );
-    Banyaszat banyagep1 = new Banyaszat();
+    Banya banyagep1 = new Banya();
     int mennyiseg = 0;
 
     @Test
-    public void ALetrehozottMennyisegTest() throws Exception
+    public void ABanyaszottMennyisegTest() throws Exception
     {
         KriptoValuta[] ethSorozat = banyagep1.kibocsatas(ethereum2020,"Bányászott Ethereum kriptovaluta",futamIdo);
         mennyiseg = ethSorozat.length;

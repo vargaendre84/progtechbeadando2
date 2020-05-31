@@ -1,4 +1,5 @@
 package ArfolyamObserver;
+import Exceptions.ArfolyamException;
 
 public class Arfolyam_USD implements IDisplay,IObserver
 {
@@ -12,9 +13,10 @@ public class Arfolyam_USD implements IDisplay,IObserver
     }
 
     @Override
-    public void Update(double eurArfolyam, double usdArfolyam,double kriptoETHArfolyam)
-    {
-        this.usdArfolyam = usdArfolyam;
+    public void Update(double eurArfolyam, double usdArfolyam,double kriptoETHArfolyam) throws ArfolyamException {
+        if (usdArfolyam > 0.0)
+            this.usdArfolyam = usdArfolyam;
+        else throw new ArfolyamException("Rossz árfolyam értéket adott meg!",usdArfolyam);
     }
 
     public double getArfolyam()

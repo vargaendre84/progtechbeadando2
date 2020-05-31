@@ -1,6 +1,6 @@
 package Intezmenyek;
 
-public class Allamkincstar  //greedy
+public class Allamkincstar
 {
    private static int cimlet = 100000;
    private static int cimletekSzama = 1000000;
